@@ -50,6 +50,7 @@ public class mare extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         final getInfoMarkerSantaS markerCarovig = new getInfoMarkerSantaS(mMap);
         ArrayList<Marker> nameproducts = markerCarovig.markersCarovigno;
@@ -75,6 +76,8 @@ public class mare extends AppCompatActivity implements OnMapReadyCallback {
             public void onItemClick(AdapterView<?> adattatore, final View componente, int pos, long id) {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markerCarovig.markersCarovigno.get(pos).getPosition(), 20.0f));
                 markerCarovig.markersCarovigno.get(pos).showInfoWindow();
+                mMap.getUiSettings().setMapToolbarEnabled(true);
+
             }
         });
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);

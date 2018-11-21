@@ -10,33 +10,46 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import c.www.carovignoviva.utility.InfoWindowData;
 import c.www.carovignoviva.utility.ListData;
 
-public class getInfoMarkerCarovigno extends AppCompatActivity {
+public class getInfoMarker extends AppCompatActivity {
     public ArrayList<Marker> markersCarovigno;
     Context context;
     ArrayList<InfoWindowData> data = new ArrayList<>();
     public ArrayList<ListData> datalist = new ArrayList<>();
 
 
-    public  getInfoMarkerCarovigno(GoogleMap mMap){
+    public  getInfoMarker (GoogleMap mMap, List<String> datain){
+        Iterator<String> i =datain.iterator();
+        int j=0;
+        while(i.hasNext()){
+            markersCarovigno.add(mMap.addMarker(new MarkerOptions()
+                    .title("chiesa")
+                    .position(new LatLng(40.706963, 17.657863))));
+            data.add(new InfoWindowData());
+            data.get(j).setTitle("");
+            data.get(j).setDescription("Questa piccola chiesetta fu realizzata annessa al castello dalla famiglia Imperiali che ivi dimorarono tra il 1732 ed il 1782. La chiesa fu successivamente utilizzata come cappella privata dalla famiglia Dentice, nella quale accedevano attraverso un passaggio che correva sull’arco antico di Porta Ostuni: essi accedevano direttamente nella chiesa prendendo posto in alto, al posto della cantoria. Il corpo di fabbrica si è sviluppato in tempi diversi, ma alla fine il risultato è lodevole: sia la cupola quanto i pavimenti sono originali.");
+            data.get(j).setDetails("Chiesa Medievale");
+            data.get(j).setImage("@mipmap/chiesa1");
+            //datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
+            markersCarovigno.get(j).setTag(data.get(0));
+        }
         context=this;
         markersCarovigno=new ArrayList<>();
 
         markersCarovigno.add(mMap.addMarker(new MarkerOptions()
-                .title("chiesa santanna")
+                .title("chiesa")
                 .position(new LatLng(40.706963, 17.657863))));
         data.add(new InfoWindowData());
         data.get(0).setDescription("Questa piccola chiesetta fu realizzata annessa al castello dalla famiglia Imperiali che ivi dimorarono tra il 1732 ed il 1782. La chiesa fu successivamente utilizzata come cappella privata dalla famiglia Dentice, nella quale accedevano attraverso un passaggio che correva sull’arco antico di Porta Ostuni: essi accedevano direttamente nella chiesa prendendo posto in alto, al posto della cantoria. Il corpo di fabbrica si è sviluppato in tempi diversi, ma alla fine il risultato è lodevole: sia la cupola quanto i pavimenti sono originali.");
         data.get(0).setDetails("Chiesa Medievale");
         data.get(0).setImage("@mipmap/chiesa1");
-        datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
+        //datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
         markersCarovigno.get(0).setTag(data.get(0));
-        InfoWindowData data3= (InfoWindowData) markersCarovigno.get(0).getTag();
-        data3.getDescription();//controllare se funziona
-
 
         markersCarovigno.add(mMap.addMarker(new MarkerOptions()
                 .title("Porta Brindisi")
@@ -44,8 +57,6 @@ public class getInfoMarkerCarovigno extends AppCompatActivity {
         data.add(new InfoWindowData());
         data.get(1).setDescription("Affiancata alla Torre del Civile risulta composta da due porte susseguenti: quella del periodo Angioino più interna del XVIII secolo, con arco a sesto acuto e coronata con beccatelli, con agibilità a mezzo corridoio ricavato sulla stessa per l\\'uso della caditoia; quella del periodo rinascimentale – più precisamente eretta nel periodo feudale dei Loffreda - che è a tutto sesto e che precede la porta più antica. Si doveva comunque trattare dell’ingresso per carri Ha conservato gli innesti originari del portone. Sul frontale, si scorgono scalpellinati due stemmi che dovrebbero essere quello dei Loffreda (a sinistra) e dell'Università di Carovigno (a destra</string>\n");
         data.get(1).setDetails("nope");
-        data.get(1).setImage("@mipmap/chiesa1");
-        datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
         markersCarovigno.get(1).setTag(data.get(1));
 
 
@@ -56,8 +67,6 @@ public class getInfoMarkerCarovigno extends AppCompatActivity {
         data.add(new InfoWindowData());
         data.get(2).setDescription("Così chiamata perché anticamente vi erano esposte le armi della città della famiglia Imperiali, signori di Carovigno prima dalla metà del XVIII secolo");
         data.get(2).setDetails("nope");
-        data.get(2).setImage("@mipmap/chiesa1");
-        datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
         markersCarovigno.get(2).setTag(data.get(2));
 
 
@@ -67,8 +76,6 @@ public class getInfoMarkerCarovigno extends AppCompatActivity {
         data.add(new InfoWindowData());
         data.get(3).setDescription("È un accesso secondario, probabilmente ricavato in tempi vicini all'eversione della feudalità. La stradina è caratterizzata da vari Archi, detti  Archi del Prete. Si Presume fosse il passaggio pedonale per l’ingresso diretto al borgo medievale, data la sua angustia e facilità di difesa.");
         data.get(3).setDetails("nope");
-        data.get(3).setImage("@mipmap/chiesa1");
-        datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
         markersCarovigno.get(3).setTag(data.get(3));
 
 
@@ -78,12 +85,10 @@ public class getInfoMarkerCarovigno extends AppCompatActivity {
         data.add(new InfoWindowData());
         data.get(4).setDescription("La torre Circolare si trova nella via del Prete. Anch'essa presenta una grossa stivatura nella quale è stato prodotto un forno. È un secondo terminale della mura");
         data.get(4).setDetails("nope");
-        data.get(4).setImage("@mipmap/chiesa1");
-        datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
         markersCarovigno.get(4).setTag(data.get(4));
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markersCarovigno.get(0).getPosition(),16.0f));
 
-        }
+    }
 
 }

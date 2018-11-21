@@ -33,6 +33,7 @@ public class main extends Activity {
             if (arg0.getId() == R.id.castello) {
                 //define a new Intent for the second Activity
                 Intent intent = new Intent(main.this , carovigno.class);
+                intent.putExtra("City","carovigno");
                 //start the second Activity
                 startActivity(intent);
 
@@ -46,6 +47,7 @@ public class main extends Activity {
             if (arg0.getId() == R.id.mare) {
                 //define a new Intent for the second Activity
                 Intent intent = new Intent(main.this, mare.class);
+                intent.putExtra("City","mare");
                 //start the second Activity
                 startActivity(intent);
 
@@ -59,6 +61,7 @@ public class main extends Activity {
             if (arg0.getId() == R.id.serranova) {
                 //define a new Intent for the second Activity
                 Intent intent = new Intent(main.this, serranova.class);
+                intent.putExtra("City","serranova");
                 //start the second Activity
                 startActivity(intent);
 
@@ -70,8 +73,10 @@ public class main extends Activity {
         public void onClick(View arg0) {
             if (arg0.getId() == R.id.specchiolla) {
                 //define a new Intent for the second Activity
+
                 Intent intent = new Intent(main.this, specchiolla.class);
                 //start the second Activity
+                intent.putExtra("City","specchiolla");
                 startActivity(intent);
 
             }
