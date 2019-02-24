@@ -4,13 +4,10 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,7 +32,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.selezione);
+        setContentView(R.layout.slideup);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -76,8 +73,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
         }
         */
         // recupero la lista dal layout
-        final FrameLayout frame=findViewById(R.id.frame);
-        final ViewGroup.LayoutParams params=frame.getLayoutParams();
+
 
         ListView listView = (ListView) findViewById(R.id.listv);
 
@@ -102,21 +98,6 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
             }
         });
 
-        FloatingActionButton button= findViewById(R.id.floatingActionButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(params.height==ViewGroup.LayoutParams.MATCH_PARENT  && params.width==ViewGroup.LayoutParams.MATCH_PARENT){
-                    params.height=1200;
-                    params.width=ViewGroup.LayoutParams.MATCH_PARENT;
-                    frame.setLayoutParams(params);
-                }else{
-                params.height=ViewGroup.LayoutParams.MATCH_PARENT;
-                params.width=ViewGroup.LayoutParams.MATCH_PARENT;
-                frame.setLayoutParams(params);
-
-            }}
-        });
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
         mMap.setInfoWindowAdapter(customInfoWindow);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
