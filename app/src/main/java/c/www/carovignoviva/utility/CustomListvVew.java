@@ -31,7 +31,7 @@ public class CustomListvVew extends ArrayAdapter<Marker> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final  getInfoMarkerCarovigno markerCarovig ;
-       // ArrayList<ListData> nameproducts = markerCarovig.datalist;
+        ArrayList<ListData> nameproducts = getInfoMarkerCarovigno.datalist;
         View v = convertView;
 
         if (v == null) {
@@ -47,14 +47,14 @@ public class CustomListvVew extends ArrayAdapter<Marker> {
             TextView tt2 = (TextView) v.findViewById(R.id.TextViewListTitle);
 
             if (tt2 != null) {
-                tt2.setText(p.getTitle());
+                tt2.setText(nameproducts.get(position).getName());
            }
 
             if (ttvisite != null) {
-                ttvisite.setText("Orario: Sempre Aperti");
+                ttvisite.setText(nameproducts.get(position).getVisit());
             }
 
-            int imageId =mContext.getResources().getIdentifier("@mipmap/chiesa1",
+            int imageId =mContext.getResources().getIdentifier(nameproducts.get(position).getImage(),
                         "drawable", mContext.getPackageName());
             ImageView img=(ImageView)v.findViewById(R.id.imageViewMonument);
             img.setImageResource(imageId);
