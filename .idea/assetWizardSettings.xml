@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="0" />
+                                                <entry key="scalingPercent" value="82" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -34,11 +34,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundImage" value="C:\Users\utente\Desktop\chiesa santa.jpg" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundImage" value="C:\Users\utente\Desktop\Carovigno.gif" />
-                                      <entry key="foregroundLayerName" value="chiesa" />
-                                      <entry key="outputName" value="chiesa1" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Scaricati/icons8-slide-up-24.png" />
+                                      <entry key="foregroundLayerName" value="swipe" />
+                                      <entry key="legacyIconShape" value="NONE" />
+                                      <entry key="outputName" value="swipeup" />
+                                      <entry key="webIconShape" value="NONE" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -65,8 +66,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_round_navigation_24px" />
-                            <entry key="sourceFile" value="$USER_HOME$/Scaricati/round-navigation-24px.svg" />
+                            <entry key="outputName" value="ic_b812d76ca969501f9110ac8fdaedd1db" />
+                            <entry key="sourceFile" value="$USER_HOME$/Scaricati/b812d76ca969501f9110ac8fdaedd1db.svg" />
                           </map>
                         </option>
                       </PersistentState>

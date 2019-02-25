@@ -19,14 +19,16 @@
 
         <activity
         android:name=".main"
-        android:label="CarovignoViva">
+        android:label="CarovignoViva"
+            android:theme="@style/MatherialOrang">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
             <category android:name="android.intent.category.DEFAULT"/>
         </intent-filter>
     </activity>
-    <activity android:name=".carovigno"></activity>
+    <activity android:name=".carovigno"
+        android:theme="@style/MatherialOrang"></activity>
     <activity android:name=".mare"></activity>
         <activity android:name=".specchiolla"></activity>
         <activity android:name=".serranova"></activity>
