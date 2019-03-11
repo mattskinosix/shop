@@ -6,38 +6,48 @@
         <shape>
             <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
             <solid android:color="#00CCCCCC" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
     <item>
         <shape>
             <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
             <solid android:color="#10CCCCCC" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
     <item>
         <shape>
             <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
             <solid android:color="#20CCCCCC" />
+            <corners android:radius="20dp" />
+
         </shape>
     </item>
     <item>
         <shape>
             <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
             <solid android:color="#30CCCCCC" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
     <item>
         <shape>
             <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
-            <solid android:color="#50CCCCCC" />
+            <solid android:color="#70CCCCCC" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
 
     <!-- Background -->
     <item>
         <shape>
-            <solid android:color="#FFFF" />
-            <corners android:radius="3dp" />
+            <size
+                android:width="50dp"
+                android:height="82dp" />
+
+            <solid android:color="#515d89" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
 </layer-list>

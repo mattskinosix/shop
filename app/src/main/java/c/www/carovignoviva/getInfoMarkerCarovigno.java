@@ -9,12 +9,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import c.www.carovignoviva.utility.InfoWindowData;
 import c.www.carovignoviva.utility.ListData;
 
-public class getInfoMarkerCarovigno extends AppCompatActivity {
+public class getInfoMarkerCarovigno extends AppCompatActivity implements Serializable {
     public ArrayList<Marker> markersCarovigno;
     Context context;
     ArrayList<InfoWindowData> data = new ArrayList<>();

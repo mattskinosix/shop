@@ -1,6 +1,8 @@
 package c.www.carovignoviva.utility;
 
-public class InfoWindowData {
+import java.io.Serializable;
+
+public class InfoWindowData implements Serializable {
     private String image;
     private String description;
     private String details;

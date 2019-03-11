@@ -57,7 +57,7 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
         TextView trasport = view.findViewById(R.id.transport);
 
         title.setText(marker.getTitle());
-        details.setText(marker.getSnippet());
+        details.setText(marker.getSnippet());ImageView img = view.findViewById(R.id.imageView2);
 
 
         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();

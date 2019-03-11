@@ -2,6 +2,7 @@ package c.www.carovignoviva;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
+        slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         /*
         Intent intent=getIntent();
         String city=intent.getStringExtra("City");
@@ -79,7 +80,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
             listp.add(markerIterator.next().getTitle());
         }
         */
-        // recupero la lista dal layout
+        // recupero la lista dal layoutCity",markerCarovig.markersCarovigno.indexOf(arg0)
 
         //PULSANTE STREETVIEW
 
@@ -129,10 +130,14 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
 
             @Override
             public void onInfoWindowClick(Marker arg0) {
+                Intent intent = new Intent(carovigno.this ,  informazioni.class);
+                intent.putExtra("City",markerCarovig.data.get(markerCarovig.markersCarovigno.indexOf(arg0)));
+                startActivity(intent);
+                /*
                 AlertDialog ad = new AlertDialog.Builder(carovigno.this).create();
                 ad.setMessage(markerCarovig.data.get(markerCarovig.markersCarovigno.indexOf(arg0)).getDescription());
                 ad.show();
-
+*/
             }
         });
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
