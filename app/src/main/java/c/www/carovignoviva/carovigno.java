@@ -31,10 +31,10 @@ import java.util.ArrayList;
 import c.www.carovignoviva.utility.CustomInfoWindowGoogleMap;
 import c.www.carovignoviva.utility.CustomListvVew;
 
-public class carovigno extends FragmentActivity implements OnMapReadyCallback , OnStreetViewPanoramaReadyCallback {
+public class carovigno extends FragmentActivity implements OnMapReadyCallback {
     static public final int REQUEST_LOCATION = 1;
     public GoogleMap mMap;
-    StreetViewPanorama streetView;
+
     SlidingUpPanelLayout slidingUpPanelLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,6 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        StreetViewPanoramaFragment streetViewPanoramaFragment =
-                (StreetViewPanoramaFragment) getFragmentManager()
-                        .findFragmentById(R.id.streetviewpanorama);
-        streetViewPanoramaFragment.getStreetViewPanoramaAsync(this);
         slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
 
     }
@@ -85,20 +81,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
         //PULSANTE STREETVIEW
 
 
-        ImageButton theButton = (ImageButton)findViewById(R.id.theButton);
-        theButton.setVisibility(View.VISIBLE);
-        theButton.setBackgroundColor(Color.TRANSPARENT);
 
-        theButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                FrameLayout frame= findViewById(R.id.framefull);
-                if(frame.getVisibility()==View.VISIBLE) frame.setVisibility(View.INVISIBLE);
-                else frame.setVisibility(View.VISIBLE);
-            }
-        });
 
         ListView listView = (ListView) findViewById(R.id.listv);
 
@@ -119,7 +102,6 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
 
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 19.0f));
                 markerCarovig.markersCarovigno.get(pos).showInfoWindow();
-                streetView.setPosition( markerCarovig.markersCarovigno.get(pos).getPosition());
                 slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
         });
@@ -152,8 +134,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
 
 
 
-        // Turn on the My Location layer and the related control on the map.
-       // updateLocationUI();
+
     }
 
     @Override
@@ -171,11 +152,4 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback , 
     }
 
 
-    @Override
-    public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
-
-        streetViewPanorama.setPosition(new LatLng(40.706963, 17.657863));
-        streetView=streetViewPanorama;
-
-    }
 }

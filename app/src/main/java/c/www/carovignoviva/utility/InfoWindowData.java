@@ -1,5 +1,7 @@
 package c.www.carovignoviva.utility;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 
 public class InfoWindowData implements Serializable {
@@ -8,7 +10,7 @@ public class InfoWindowData implements Serializable {
     private String details;
     private String transport;
     private String title;
-
+    private double Longitude,latitude;
 
 
     public  String getTitle(){
@@ -51,4 +53,18 @@ public class InfoWindowData implements Serializable {
     public void setTransport(String transport) {
         this.transport = transport;
     }
+
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitudeLatitude(LatLng mat) {
+        Longitude = mat.longitude;
+        this.latitude = mat.latitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
 }

@@ -25,53 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <FrameLayout
-            android:id="@+id/framefull"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="invisible">
-
-            <fragment
-                android:id="@+id/streetviewpanorama"
-                android:name="com.google.android.gms.maps.StreetViewPanoramaFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom|start"
-                android:layout_margin="10dp" />
-
-        </FrameLayout>
-
-        <ImageButton
-            android:id="@+id/theButton"
-            android:layout_width="91dp"
-            android:layout_height="93dp"
-            android:layout_gravity="start"
-            android:layout_margin="10dp"
-            android:adjustViewBounds="true"
-            android:padding="20dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_round_streetview_24px"
-            android:visibility="visible" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="76dp"
             android:layout_height="58dp"
             android:layout_gravity="bottom|center_horizontal"
             android:src="@drawable/ic_b812d76ca969501f9110ac8fdaedd1db" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="85dp"
-            android:text="Tocca per la StreetView"
-            android:textColor="@android:color/background_dark"
-            tools:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
 
     </FrameLayout>

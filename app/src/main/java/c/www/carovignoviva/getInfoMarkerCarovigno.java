@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import c.www.carovignoviva.utility.InfoWindowData;
 import c.www.carovignoviva.utility.ListData;
@@ -33,6 +34,7 @@ public class getInfoMarkerCarovigno extends AppCompatActivity implements Seriali
         data.get(0).setDescription("Questa piccola chiesetta fu realizzata annessa al castello dalla famiglia Imperiali che ivi dimorarono tra il 1732 ed il 1782. La chiesa fu successivamente utilizzata come cappella privata dalla famiglia Dentice, nella quale accedevano attraverso un passaggio che correva sull’arco antico di Porta Ostuni: essi accedevano direttamente nella chiesa prendendo posto in alto, al posto della cantoria. Il corpo di fabbrica si è sviluppato in tempi diversi, ma alla fine il risultato è lodevole: sia la cupola quanto i pavimenti sono originali.");
         data.get(0).setDetails("Chiesa Medievale");
         data.get(0).setImage("@mipmap/chiesa1");
+
         datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(0).getTitle(),"Sempre Aperto"));
         markersCarovigno.get(0).setTag(data.get(0));
         InfoWindowData data3= (InfoWindowData) markersCarovigno.get(0).getTag();
@@ -295,7 +297,14 @@ public class getInfoMarkerCarovigno extends AppCompatActivity implements Seriali
         data.get(13).setImage("@mipmap/chiesa1");
         datalist.add(new ListData("@mipmap/chiesa1",markersCarovigno.get(13).getTitle(),"Sempre Aperto"));
         markersCarovigno.get(13).setTag(data.get(13));
-
+        int i=0;
+        Iterator<Marker> it =markersCarovigno.iterator();
+        while (it.hasNext()){
+            Marker marker=it.next();
+            data.get(i).setTitle(marker.getTitle());
+            data.get(i).setLongitudeLatitude(marker.getPosition());
+            i++;
+        }
 
 
 

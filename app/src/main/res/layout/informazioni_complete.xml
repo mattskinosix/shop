@@ -6,20 +6,59 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/framefull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:visibility="gone">
+
+        <fragment
+            android:id="@+id/streetviewpanorama"
+            android:name="com.google.android.gms.maps.StreetViewPanoramaFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="10dp"
+            android:background="@drawable/frame_form_backfround" />
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="24dp"
+            android:layout_height="23dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tint="@android:color/holo_red_dark" />
+
+    </FrameLayout>
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
-    <android.support.design.widget.BottomNavigationView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:iconTint="@color/colorPrimaryDark"
-        app:itemBackground="@color/accent_material_light_1"
-        app:itemIconTint="@color/common_google_signin_btn_text_dark_focused"
-        app:menu="@menu/bottom_navigation_main" >
+        android:layout_height="50dp"
+        android:orientation="horizontal">
 
-    </android.support.design.widget.BottomNavigationView>
+        <ImageButton
+            android:id="@+id/navigatore"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="90dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_round_navigation_24px" />
+
+        <ImageButton
+            android:id="@+id/streetview"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="85dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_round_streetview_24px" />
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,6 +75,7 @@
                 android:layout_height="match_parent"
                 android:text="TextView"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
         </LinearLayout>
     </ScrollView>
 
