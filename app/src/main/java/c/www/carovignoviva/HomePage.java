@@ -99,7 +99,8 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
             public void onInfoWindowClick(Marker arg0) {
                 Intent intent = new Intent(HomePage.this ,  informazioni.class);
                 int i=0;
-                //while (arg0.getTitle()!=monumenti.get(i).getMarker().getTitle()) i++;
+                //TO DO
+                while (arg0.getTitle()!=monumenti.get(i).getMarker().getTitle()) i++;
                 intent.putExtra("City",monumenti.get(i));
                 startActivity(intent);
             }
