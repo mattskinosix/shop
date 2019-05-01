@@ -12,17 +12,16 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 
-import c.www.carovignoviva.Monumento;
 import c.www.carovignoviva.R;
 import c.www.carovignoviva.getInfoMarkerCarovigno;
 
-public class CustomListvVew extends ArrayAdapter<Monumento> {
+public class CustomListvView extends ArrayAdapter<Marker> {
 
 
     private int  resourceLayout;
     private Context mContext;
-    public CustomListvVew(Context context, int textViewResourceId,
-                         ArrayList <Monumento> objects) {
+    public CustomListvView(Context context, int textViewResourceId,
+                           ArrayList <Marker> objects) {
         super(context, textViewResourceId, objects);
         mContext=context;
         resourceLayout=textViewResourceId;
@@ -31,6 +30,8 @@ public class CustomListvVew extends ArrayAdapter<Monumento> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final  getInfoMarkerCarovigno markerCarovig ;
+        ArrayList<ListData> nameproducts = getInfoMarkerCarovigno.datalist;
         View v = convertView;
 
         if (v == null) {
@@ -39,21 +40,21 @@ public class CustomListvVew extends ArrayAdapter<Monumento> {
             v = vi.inflate(resourceLayout, null);
         }
 
-        Monumento p = getItem(position);
+        Marker p = getItem(position);
 
         if (p != null) {
             TextView ttvisite = (TextView) v.findViewById(R.id.textViewListVisite);
             TextView tt2 = (TextView) v.findViewById(R.id.TextViewListTitle);
 
             if (tt2 != null) {
-                tt2.setText(p.getNome());
+                tt2.setText(nameproducts.get(position).getName());
            }
 
             if (ttvisite != null) {
-                ttvisite.setText(p.getOrario());
+                ttvisite.setText(nameproducts.get(position).getVisit());
             }
 
-            int imageId =mContext.getResources().getIdentifier(p.getImage(),
+            int imageId =mContext.getResources().getIdentifier(nameproducts.get(position).getImage(),
                         "drawable", mContext.getPackageName());
             ImageView img=(ImageView)v.findViewById(R.id.imageViewMonument);
             img.setImageResource(imageId);

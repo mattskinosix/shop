@@ -77,7 +77,8 @@ public class specchiolla extends AppCompatActivity implements OnMapReadyCallback
                 markerCarovig.markersCarovigno.get(pos).showInfoWindow();
             }
         });
-        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+        /*
+        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this, monumenti);
         mMap.setInfoWindowAdapter(customInfoWindow);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
@@ -99,7 +100,7 @@ public class specchiolla extends AppCompatActivity implements OnMapReadyCallback
         }
 
 
-
+*/
         // Turn on the My Location layer and the related control on the map.
         // updateLocationUI();
     }

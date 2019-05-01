@@ -1,26 +1,18 @@
 package c.www.carovignoviva;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
-import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -29,12 +21,11 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 
 import c.www.carovignoviva.utility.CustomInfoWindowGoogleMap;
-import c.www.carovignoviva.utility.CustomListvVew;
+import c.www.carovignoviva.utility.CustomListvView;
 
 public class carovigno extends FragmentActivity implements OnMapReadyCallback {
     static public final int REQUEST_LOCATION = 1;
     public GoogleMap mMap;
-
     SlidingUpPanelLayout slidingUpPanelLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,26 +58,10 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback {
           */
         final getInfoMarkerCarovigno markerCarovig = new getInfoMarkerCarovigno(mMap);
         ArrayList<Marker> nameproducts = markerCarovig.markersCarovigno;
-
-        // definisco un ArrayList
-/*
-        final ArrayList<String> listp = new ArrayList<>();
-        final Iterator<Marker> markerIterator = nameproducts.iterator();
-        while (markerIterator.hasNext()) {
-            listp.add(markerIterator.next().getTitle());
-        }
-        */
-        // recupero la lista dal layoutCity",markerCarovig.markersCarovigno.indexOf(arg0)
-
-        //PULSANTE STREETVIEW
-
-
-
-
         ListView listView = (ListView) findViewById(R.id.listv);
 
         // creo e istruisco l'adattatore
-        final CustomListvVew adapter = new CustomListvVew(this, R.layout.listitem, nameproducts);
+        final CustomListvView adapter = new CustomListvView(this, R.layout.listitem, nameproducts);
 
         // inietto i dati
 
@@ -106,7 +81,8 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback {
             }
         });
 
-        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+        /*
+        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this, monumenti);
         mMap.setInfoWindowAdapter(customInfoWindow);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
@@ -119,7 +95,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback {
                 AlertDialog ad = new AlertDialog.Builder(carovigno.this).create();
                 ad.setMessage(markerCarovig.data.get(markerCarovig.markersCarovigno.indexOf(arg0)).getDescription());
                 ad.show();
-*/
+
             }
         });
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -132,7 +108,7 @@ public class carovigno extends FragmentActivity implements OnMapReadyCallback {
             mMap.setMyLocationEnabled(true);
         }
 
-
+*/
 
 
     }

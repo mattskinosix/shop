@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="c.www.carovignoviva">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,7 @@
             android:theme="@style/MatherialOrang">
 
     </activity>
-    <activity android:name=".carovigno"
+    <activity android:name=".HomePage"
         android:theme="@style/MatherialOrang">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

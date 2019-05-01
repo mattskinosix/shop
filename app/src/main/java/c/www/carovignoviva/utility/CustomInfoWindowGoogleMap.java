@@ -9,13 +9,17 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
+import java.util.ArrayList;
+
+import c.www.carovignoviva.Monumento;
 import c.www.carovignoviva.R;
 
 public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
 
     private final Context context;
-
-    public CustomInfoWindowGoogleMap(Context ctx){
+    private ArrayList<Monumento> monumenti;
+    public CustomInfoWindowGoogleMap(Context ctx, ArrayList<Monumento> monument){
+        monumenti=monument;
         context = ctx;
     }
 
@@ -30,17 +34,9 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
        // TextView trasport = view.findViewById(R.id.transport);
 
         title.setText(marker.getTitle());
-       // details.setText(marker.getSnippet());
-
-
-        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
-        int imageId = context.getResources().getIdentifier(infoWindowData.getImage().toLowerCase(),
+        int imageId = context.getResources().getIdentifier(monumenti.get(0).getImage().toLowerCase(),
                 "drawable", context.getPackageName());
         img.setImageResource(imageId);
-
-        //details.setText(infoWindowData.getDetails());
-       // description.setText(infoWindowData.getDescription());
-        //trasport.setText(infoWindowData.getTransport());
 
         return view;
     }

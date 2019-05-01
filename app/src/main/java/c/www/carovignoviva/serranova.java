@@ -76,8 +76,8 @@ public class serranova extends AppCompatActivity implements OnMapReadyCallback {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markerCarovig.markersCarovigno.get(pos).getPosition(), 20.0f));
                 markerCarovig.markersCarovigno.get(pos).showInfoWindow();
             }
-        });
-        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+        });/*
+        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this, monumenti);
         mMap.setInfoWindowAdapter(customInfoWindow);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
@@ -102,6 +102,7 @@ public class serranova extends AppCompatActivity implements OnMapReadyCallback {
 
         // Turn on the My Location layer and the related control on the map.
         // updateLocationUI();
+        */
     }
 
     @Override

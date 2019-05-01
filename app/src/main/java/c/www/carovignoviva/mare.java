@@ -80,7 +80,8 @@ public class mare extends AppCompatActivity implements OnMapReadyCallback {
 
             }
         });
-        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+        /*
+        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this, monumenti);
         mMap.setInfoWindowAdapter(customInfoWindow);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
@@ -101,7 +102,7 @@ public class mare extends AppCompatActivity implements OnMapReadyCallback {
             mMap.setMyLocationEnabled(true);
         }
 
-
+*/
 
         // Turn on the My Location layer and the related control on the map.
         // updateLocationUI();
