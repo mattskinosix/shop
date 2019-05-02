@@ -13,7 +13,7 @@
         android:id="@+id/textView8"
         android:layout_width="161dp"
         android:layout_height="42dp"
-        android:text="Tocca per leggere la Storia "
+        android:text="@string/tocca_per_leggere_la_storia"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +49,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:contentDescription="@string/leggi_la_storia" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom|start"
-            android:layout_margin="10dp"
-            android:background="@drawable/frame_form_backfround" />
+            android:layout_margin="10dp"/>
 
         <ImageButton
             android:id="@+id/close"
@@ -28,14 +25,16 @@
             android:layout_height="23dp"
             android:backgroundTint="@android:color/transparent"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:tint="@android:color/holo_red_dark" />
+            android:tint="@android:color/holo_red_dark"
+            android:contentDescription="@string/close_map_s_fragment" />
 
     </FrameLayout>
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/Image_info"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:contentDescription="@string/principal_image_in_informazioni_complete" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,14 +47,17 @@
             android:layout_height="50dp"
             android:layout_marginStart="90dp"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_round_navigation_24px" />
+            android:src="@drawable/ic_round_navigation_24px"
+            android:contentDescription="@string/button_for_navigator" />
 
         <ImageButton
             android:id="@+id/streetview"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="85dp"
+            android:adjustViewBounds="false"
             android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/open_street_view_frame"
             android:src="@drawable/ic_round_streetview_24px" />
 
     </LinearLayout>
@@ -66,14 +68,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/descrizione_info_complete"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="TextView"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         </LinearLayout>

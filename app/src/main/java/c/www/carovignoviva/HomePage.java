@@ -30,8 +30,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
-import c.www.carovignoviva.utility.CustomInfoWindowGoogleMap;
-import c.www.carovignoviva.utility.CustomListvVew;
+import c.www.carovignoviva.CustomUtility.CustomInfoWindowGoogleMap;
+import c.www.carovignoviva.CustomUtility.CustomListvVew;
 
 public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
     static public final int REQUEST_LOCATION = 1;
@@ -43,12 +43,12 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        slidingUpPanelLayout = findViewById(R.id.sliding_layout);
 
     }
     private void creaLista(final ArrayList<Monumento> monumentos, final GoogleMap mMap){
         //CREO LA LISTA CON I DATI CONTENUTI NEL VETTORE DI MONUMENTI
-        ListView listView = (ListView) findViewById(R.id.listv);
+        ListView listView = findViewById(R.id.listv);
 
         // creo e istruisco l'adattatore
         final CustomListvVew adapter = new CustomListvVew(this, R.layout.listitem, monumentos);
@@ -70,25 +70,21 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        GoogleMap mMap = googleMap;
         ArrayList<Monumento> monumenti=null;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         //ESPANDO IL PANNELLO SLIDING
         slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         try {
             //CARICO I MONUMENTI DALLA PAGINA PHP
             monumenti=new Monumento().monumentoFromJson(new GetFromServer().execute().get());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (JSONException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        addMarker(monumenti,mMap);
-        creaLista(monumenti,mMap);
-      setCustomInfoWindows(mMap,monumenti);
+        addMarker(monumenti, googleMap);
+        creaLista(monumenti, googleMap);
+        setCustomInfoWindows(googleMap,monumenti);
     }
+
 
     private void setCustomInfoWindows(GoogleMap mMap, final  ArrayList<Monumento> monumenti) {
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this,monumenti);
@@ -100,7 +96,7 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
                 Intent intent = new Intent(HomePage.this ,  informazioni.class);
                 int i=0;
                 //TO DO
-                while (arg0.getTitle()!=monumenti.get(i).getMarker().getTitle()) i++;
+                while (!arg0.getTitle().equals(monumenti.get(i).getMarker().getTitle())) i++;
                 intent.putExtra("City",monumenti.get(i));
                 startActivity(intent);
             }
@@ -108,10 +104,10 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
+
+
     private void addMarker(ArrayList<Monumento> monumenti, GoogleMap mMap){
-        Iterator<Monumento> monumentoIterator=monumenti.iterator();
-        while(monumentoIterator.hasNext()){
-            Monumento monumento=monumentoIterator.next();
+        for (Monumento monumento : monumenti) {
             monumento.setMarker(mMap.addMarker(new MarkerOptions()
                     .title(monumento.getNome())
                     .position(new LatLng(monumento.getLatitude(), monumento.getLongitude()))));
@@ -119,7 +115,7 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
     }
 
 
-    private  class GetFromServer extends AsyncTask<Void, Void, String> {
+    private static  class  GetFromServer extends AsyncTask<Void, Void, String> {
         private String dati;
 
         private String mostroDati(InputStream ists) throws IOException {

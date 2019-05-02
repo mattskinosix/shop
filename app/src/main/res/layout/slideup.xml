@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,7 +28,8 @@
             android:layout_width="76dp"
             android:layout_height="58dp"
             android:layout_gravity="bottom|center_horizontal"
-            android:src="@drawable/ic_b812d76ca969501f9110ac8fdaedd1db" />
+            android:src="@drawable/arrow_swipe"
+            android:contentDescription="@string/swide_up" />
 
 
     </FrameLayout>

@@ -1,11 +1,25 @@
 <resources>
     <string name="app_name">CarovignoViva</string>
-    <string name="ok">ok</string>
+    <string name="ok">OK</string>
     <string name="text_location_permission">Vuoi darmi la posizione</string>
     <string name="title_location_permission">Posizione</string>
-    <string name="DChiesaS.a">Questa piccola chiesetta fu realizzata annessa al castello dalla famiglia Imperiali che ivi dimorarono tra il 1732 ed il 1782. La chiesa fu successivamente utilizzata come cappella privata dalla famiglia Dentice, nella quale accedevano attraverso un passaggio che correva sull’arco antico di Porta Ostuni: essi accedevano direttamente nella chiesa prendendo posto in alto, al posto della cantoria. Il corpo di fabbrica si è sviluppato in tempi diversi, ma alla fine il risultato è lodevole: sia la cupola quanto i pavimenti sono originali.</string>
     <string name="DPortaBr">Affiancata alla Torre del Civile risulta composta da due porte susseguenti: quella del periodo Angioino più interna del XVIII secolo, con arco a sesto acuto e coronata con beccatelli, con agibilità a mezzo corridoio ricavato sulla stessa per l\'uso della caditoia; quella del periodo rinascimentale – più precisamente eretta nel periodo feudale dei Loffreda - che è a tutto sesto e che precede la porta più antica. Si doveva comunque trattare dell’ingresso per carri Ha conservato gli innesti originari del portone. Sul frontale, si scorgono scalpellinati due stemmi che dovrebbero essere quello dei Loffreda (a sinistra) e dell\'Università di Carovigno (a destra</string>
     <string name="DTorredelCivile">Così chiamata perché anticamente vi erano esposte le armi della città della famiglia Imperiali, signori di Carovigno prima dalla metà del XVIII secolo.</string>
     <string name="PortadelPrete">È un accesso secondario, probabilmente ricavato in tempi vicini all\'eversione della feudalità. La stradina è caratterizzata da vari Archi, detti  Archi del Prete. Si Presume fosse il passaggio pedonale per l’ingresso diretto al borgo medievale, data la sua angustia e facilità di difesa.</string>
     <string name="TorreCircolare"> </string>
+    <string name="close_map_s_fragment">Close map\'s fragment</string>
+    <string name="principal_image_in_informazioni_complete">principal image in informazioni complete</string>
+    <string name="button_for_navigator">button for navigator</string>
+    <string name="open_street_view_frame">Open street view frame</string>
+    <string name="button">Button</string>
+    <string name="carovigno">Carovigno</string>
+    <string name="s_sabina">S.Sabina</string>
+    <string name="serranova">Serranova</string>
+    <string name="specchiolla">Specchiolla</string>
+    <string name="carovignoviva">CarovignoViva</string>
+    <string name="tocca_la_citta_che_vuoi_visitare">Tocca la citta che vuoi visitare</string>
+    <string name="leggi_la_storia">Leggi la storia</string>
+    <string name="swide_up">SWide Up</string>
+    <string name="image_of_monuments">image of monuments</string>
+    <string name="tocca_per_leggere_la_storia">Tocca per leggere la Storia</string>
 </resources>

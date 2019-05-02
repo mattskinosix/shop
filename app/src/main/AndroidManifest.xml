@@ -2,12 +2,10 @@
     package="c.www.carovignoviva">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_main"
+        android:icon="@mipmap/stemma"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <meta-data
@@ -16,24 +14,14 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <activity
-        android:name=".main"
-        android:label="CarovignoViva"
-            android:theme="@style/MatherialOrang">
-
-    </activity>
-    <activity android:name=".HomePage"
+        <activity android:name=".HomePage"
         android:theme="@style/MatherialOrang">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
             <category android:name="android.intent.category.DEFAULT"/>
         </intent-filter>
-    </activity>
-    <activity android:name=".mare"></activity>
-        <activity android:name=".specchiolla"></activity>
-        <activity android:name=".serranova"></activity>
+        </activity>
         <activity android:name=".informazioni" />
     </application>
 </manifest>
