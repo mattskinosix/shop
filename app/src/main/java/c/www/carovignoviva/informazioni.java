@@ -2,11 +2,8 @@ package c.www.carovignoviva;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -18,8 +15,6 @@ import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class informazioni extends Activity implements OnStreetViewPanoramaReadyCallback {

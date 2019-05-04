@@ -1,11 +1,6 @@
 package c.www.carovignoviva.CustomUtility;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +11,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import c.www.carovignoviva.CircleTrasform;
 import c.www.carovignoviva.Monumento;
 import c.www.carovignoviva.R;
-import c.www.carovignoviva.RetriveImageInternet;
 
 public class CustomListvVew extends ArrayAdapter<Monumento> {
-
-
     private int  resourceLayout;
     private Context mContext;
     public CustomListvVew(Context context, int textViewResourceId,
@@ -37,7 +28,6 @@ public class CustomListvVew extends ArrayAdapter<Monumento> {
 
 
     @Override
-    @NonNull
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
 

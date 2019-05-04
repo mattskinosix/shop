@@ -3,7 +3,7 @@ package c.www.carovignoviva;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -27,9 +28,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
+import androidx.fragment.app.FragmentActivity;
 import c.www.carovignoviva.CustomUtility.CustomInfoWindowGoogleMap;
 import c.www.carovignoviva.CustomUtility.CustomListvVew;
 
@@ -40,8 +41,8 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slideup);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        MapFragment mapFragment = MapFragment.newInstance();
+        getFragmentManager().beginTransaction().add(R.id.map, mapFragment).commit();
         mapFragment.getMapAsync(this);
         slidingUpPanelLayout = findViewById(R.id.sliding_layout);
 
@@ -144,7 +145,7 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
             try {
 
                 // Creao l'oggetto URL che rappresenta l'indirizzo della pagina da richiamare
-                URL paginaURL = new URL("http://192.168.1.16/carovogno.php");
+                URL paginaURL = new URL("http://79.42.27.192:8000/carovogno.php");
 
                 // creo l'oggetto HttpURLConnection e apro la connessione al server
                 HttpURLConnection client = (HttpURLConnection) paginaURL.openConnection();
