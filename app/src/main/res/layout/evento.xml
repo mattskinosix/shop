@@ -4,30 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout3"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="400dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="362dp"
+        android:layout_height="204dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/card_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571">
+        app:layout_constraintTop_toTopOf="@+id/imageViewMonumentEvent">
 
         <TextView
-            android:id="@+id/TextViewListTitle"
+            android:id="@+id/TextViewListTitleEvent"
             android:layout_width="239dp"
             android:layout_height="36dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="56dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-condensed"
             android:lineSpacingExtra="8sp"
@@ -37,50 +33,56 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.050000012" />
+            app:layout_constraintVertical_bias="0.331" />
 
         <TextView
             android:id="@+id/ora"
             android:layout_width="244dp"
             android:layout_height="29dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="48dp"
             android:fontFamily="sans-serif"
-            android:text="Orario Visite:"
+            android:text="Ora inizio                             Ora fine"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextViewListTitle"
-            app:layout_constraintVertical_bias="0.177" />
+            app:layout_constraintTop_toBottomOf="@+id/TextViewListTitleEvent"
+            app:layout_constraintVertical_bias="0.274" />
 
         <TextView
-            android:id="@+id/textViewListVisite"
-            android:layout_width="244dp"
-            android:layout_height="29dp"
+            android:id="@+id/textViewListVisiteEvent"
+            android:layout_width="94dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="196dp"
             android:fontFamily="sans-serif"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewListTitleEvent"
-            app:layout_constraintVertical_bias="0.983" />
+            app:layout_constraintVertical_bias="0.875" />
+
+        <TextView
+            android:id="@+id/textViewListVisiteEvent2"
+            android:layout_width="94dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="48dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextViewListTitleEvent"
+            app:layout_constraintVertical_bias="0.875" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageViewMonument"
-        android:layout_width="70dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/imageViewMonumentEvent"
+        android:layout_width="138dp"
+        android:layout_height="128dp"
+        android:layout_marginBottom="244dp"
         android:contentDescription="@string/image_of_monuments"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.502" />
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

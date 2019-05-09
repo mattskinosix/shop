@@ -1,19 +1,24 @@
 package c.www.carovignoviva;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -26,38 +31,70 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import androidx.fragment.app.FragmentActivity;
 import c.www.carovignoviva.CustomUtility.CustomInfoWindowGoogleMap;
-import c.www.carovignoviva.CustomUtility.CustomListvVew;
+import c.www.carovignoviva.CustomUtility.CustomListViewHome;
 
-public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
+public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallback {
     static public final int REQUEST_LOCATION = 1;
     SlidingUpPanelLayout slidingUpPanelLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.slideup);
-        MapFragment mapFragment = MapFragment.newInstance();
-        getFragmentManager().beginTransaction().add(R.id.map, mapFragment).commit();
-        mapFragment.getMapAsync(this);
-        slidingUpPanelLayout = findViewById(R.id.sliding_layout);
+        if (!isOnline()) {
+            setContentView(R.layout.error_network);
+            TextView textView = findViewById(R.id.errorview);
+            textView.setText("intetnet è spento");
+            Button button= findViewById(R.id.refresh);
+            button.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    finish();
+                    startActivity(getIntent());
+                }
+            });
+        } else {
+            setContentView(R.layout.slideup);
+            MapFragment mapFragment = MapFragment.newInstance();
+            getFragmentManager().beginTransaction().add(R.id.map, mapFragment).commit();
+            mapFragment.getMapAsync(this);
+            slidingUpPanelLayout = findViewById(R.id.sliding_layout);
+        }
 
     }
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("http://79.42.27.192:8000/");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
+
     private void creaLista(final ArrayList<Monumento> monumentos, final GoogleMap mMap){
         //CREO LA LISTA CON I DATI CONTENUTI NEL VETTORE DI MONUMENTI
         ListView listView = findViewById(R.id.listv);
 
         // creo e istruisco l'adattatore
-        final CustomListvVew adapter = new CustomListvVew(this, R.layout.listitem, monumentos);
+        final CustomListViewHome adapter = new CustomListViewHome(this, R.layout.listitem, monumentos);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adattatore, final View componente, int pos, long id) {
-
                 Double latitude=monumentos.get(pos).getLatitude();
                 latitude+=.0002;
                 Double longitude=monumentos.get(pos).getLongitude();
@@ -71,21 +108,35 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        ArrayList<Monumento> monumenti=null;
+        ArrayList<Monumento> monumenti = null;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         //ESPANDO IL PANNELLO SLIDING
         slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         try {
             //CARICO I MONUMENTI DALLA PAGINA PHP
-            monumenti=new Monumento().monumentoFromJson(new GetFromServer().execute().get());
+            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute().get());
         } catch (JSONException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        addMarker(monumenti, googleMap);
-        creaLista(monumenti, googleMap);
-        setCustomInfoWindows(googleMap,monumenti);
-    }
+        if (!isInternetAvailable() && isOnline() && monumenti==null) {
+            setContentView(R.layout.error_network);
+            TextView textView = findViewById(R.id.errorview);
+            textView.setText("server rotto");
+            Button button= findViewById(R.id.refresh);
+            button.setOnClickListener(new View.OnClickListener(){
 
+                @Override
+                public void onClick(View v) {
+                    finish();
+                    startActivity(getIntent());
+                }
+            });
+        } else {
+            addMarker(monumenti, googleMap);
+            creaLista(monumenti, googleMap);
+            setCustomInfoWindows(googleMap, monumenti);
+        }
+    }
 
     private void setCustomInfoWindows(GoogleMap mMap, final  ArrayList<Monumento> monumenti) {
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this,monumenti);
@@ -94,7 +145,7 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
 
             @Override
             public void onInfoWindowClick(Marker arg0) {
-                Intent intent = new Intent(HomePage.this ,  informazioni.class);
+                Intent intent = new Intent(HomeMonumenti.this ,  Information.class);
                 int i=0;
                 //TO DO
                 while (!arg0.getTitle().equals(monumenti.get(i).getMarker().getTitle())) i++;
@@ -145,7 +196,7 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
             try {
 
                 // Creao l'oggetto URL che rappresenta l'indirizzo della pagina da richiamare
-                URL paginaURL = new URL("http://79.42.27.192:8000/carovogno.php");
+                URL paginaURL = new URL("http://79.42.27.192:8000/carovigno.php");
 
                 // creo l'oggetto HttpURLConnection e apro la connessione al server
                 HttpURLConnection client = (HttpURLConnection) paginaURL.openConnection();
@@ -153,7 +204,7 @@ public class HomePage  extends FragmentActivity implements OnMapReadyCallback {
                 client.setInstanceFollowRedirects(true);
                 client.setRequestMethod("GET");
                 client.connect();
-                // Recupero le informazioni inviate dal server
+                // Recupero le Information inviate dal server
                 InputStream risposta = client.getInputStream();
                 datiLetti = mostroDati(risposta);
                 Log.i("CIAO", datiLetti);

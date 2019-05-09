@@ -3,21 +3,23 @@ package c.www.carovignoviva.CustomUtility;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
-import c.www.carovignoviva.CircleTrasform;
 import c.www.carovignoviva.Monumento;
 import c.www.carovignoviva.R;
-import c.www.carovignoviva.RetriveImageInternet;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import okhttp3.OkHttpClient;
 
 public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
 
@@ -40,16 +42,47 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
         int i=0;
         while (!marker.getTitle().equals(monumenti.get(i).getMarker().getTitle())) i++;
         title.setText(marker.getTitle());
+        if (marker.getTag() == null ) {
+            Log.i("prepareInfoView", "fetching image");
+            Picasso.get().load(monumenti.get(i).getImage()[0]).fetch(new MarkerCallback(marker));
+        }
+        else  {
+            Log.wtf("prepareInfoView", "building info window");
+        }
+        Log.i("prepareInfoView", "fetching image");
 
-        Picasso.get().load(monumenti.get(i).getImage())
-                .transform(new CircleTrasform()).into(img);
-
+        Picasso.get().load(monumenti.get(i).getImage()[0])
+                .resize(350,350)
+                .transform(new CropCircleTransformation()).into(img);
         return view;
     }
 
     @Override
     public View getInfoContents(Marker marker) {
         return null;
+    }
+    static class MarkerCallback implements Callback {
+        Marker marker=null;
+
+        MarkerCallback(Marker marker) {
+            this.marker=marker;
+        }
+
+
+        @Override
+        public void onSuccess() {
+            Log.i("ERROR", "image got, should rebuild window");
+            if (marker != null && marker.isInfoWindowShown()) {
+                Log.i("OK", "conditions met, redrawing window");
+                marker.setTag(new Boolean("True"));
+                marker.showInfoWindow();
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
     }
 }
 

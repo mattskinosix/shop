@@ -1,7 +1,6 @@
 package c.www.carovignoviva;
 
 import com.google.android.gms.maps.model.Marker;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +16,7 @@ public class Monumento  implements Serializable {
     private Double longitude;
     private Double latitude;
     private String description;
-    private String image;
+    private String[] image=new String[4];
     private String detail;
     private String orario;
     private transient Marker marker;
@@ -33,9 +32,12 @@ public class Monumento  implements Serializable {
             monumento.longitude = jsonobject.getDouble("longitude");
             monumento.latitude= jsonobject.getDouble("latitude");
             monumento.description = jsonobject.getString("description");
-            monumento.image = jsonobject.getString("image");
             monumento.detail= jsonobject.getString("detail");
             monumento.orario= jsonobject.getString("orario");
+            monumento.image[0]=jsonobject.getString("img1");
+            monumento.image[1]=jsonobject.getString("img2");
+            monumento.image[2]=jsonobject.getString("img3");
+            monumento.image[3]=jsonobject.getString("img4");
             monumenti.add(monumento);
         }
         return monumenti;
@@ -61,7 +63,7 @@ public class Monumento  implements Serializable {
         return description;
     }
 
-    public String getImage() {
+    public String[] getImage() {
         return image;
     }
 

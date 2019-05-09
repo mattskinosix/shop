@@ -7,17 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.concurrent.ExecutionException;
+import c.www.carovignoviva.CustomUtility.ViewPagerAdapter;
 
-public class informazioni extends Activity implements OnStreetViewPanoramaReadyCallback {
+public class Information extends Activity implements OnStreetViewPanoramaReadyCallback {
 
 
     private StreetViewPanorama streetView;
@@ -31,7 +32,7 @@ public class informazioni extends Activity implements OnStreetViewPanoramaReadyC
 
         Intent intent=getIntent();
             city=(Monumento)intent.getSerializableExtra("City");
-            ImageView img = findViewById(R.id.Image_info);
+
 
             //   TextView description = view.findViewById(R.id.description);
             // TextView trasport = view.findViewById(R.id.transport);
@@ -40,16 +41,22 @@ public class informazioni extends Activity implements OnStreetViewPanoramaReadyC
                             .findFragmentById(R.id.streetviewpanorama);
             streetViewPanoramaFragment.getStreetViewPanoramaAsync(this);
             TextView text= findViewById(R.id.descrizione_info_complete);
+        text.setText(city.getDescription());
+        TextView titolo= findViewById(R.id.titolo_info_complete);
+            titolo.setText(city.getNome());
+        ViewPager viewPager = findViewById(R.id.Imagepager);
+       String[] imageUrls = new String[]{
+                "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",
+                "https://cdn.pixabay.com/photo/2017/12/21/12/26/glowworm-3031704_960_720.jpg",
+                "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg",
+                "https://cdn.pixabay.com/photo/2017/11/07/00/07/fantasy-2925250_960_720.jpg",
+                "https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"
+        };
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this, city.getImage());
+        viewPager.setAdapter(adapter);
 
-            text.setText(city.getDescription());
-
-        try {
-            img.setImageDrawable(new RetriveImageInternet().execute(city.getImage()).get());
-        } catch (InterruptedException  | ExecutionException e1) {
-            e1.printStackTrace();
-        }
         ImageButton navigatore= findViewById(R.id.navigatore);
-            ImageButton streetbutton= findViewById(R.id.streetview);
+        ImageButton streetbutton= findViewById(R.id.streetview);
 
             navigatore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,5 +102,7 @@ public class informazioni extends Activity implements OnStreetViewPanoramaReadyC
         streetView=streetViewPanorama;
 
     }
+
+
 
 }

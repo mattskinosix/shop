@@ -15,7 +15,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity android:name=".HomePage"
+        <activity android:name=".Home"
         android:theme="@style/MatherialOrang">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -24,6 +24,8 @@
 
         </intent-filter>
         </activity>
-        <activity android:name=".informazioni" />
+        <activity android:name=".Information" />
+        <activity android:name=".HomeEventi" />
+        <activity android:name=".HomeMonumenti" />
     </application>
 </manifest>

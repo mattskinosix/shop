@@ -12,15 +12,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import c.www.carovignoviva.CircleTrasform;
 import c.www.carovignoviva.Monumento;
 import c.www.carovignoviva.R;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-public class CustomListvVew extends ArrayAdapter<Monumento> {
+public class CustomListViewHome extends ArrayAdapter<Monumento> {
     private int  resourceLayout;
     private Context mContext;
-    public CustomListvVew(Context context, int textViewResourceId,
-                         ArrayList <Monumento> objects) {
+    public CustomListViewHome(Context context, int textViewResourceId,
+                              ArrayList <Monumento> objects) {
         super(context, textViewResourceId, objects);
         mContext=context;
         resourceLayout=textViewResourceId;
@@ -51,8 +51,10 @@ public class CustomListvVew extends ArrayAdapter<Monumento> {
                 ttvisite.setText(p.getOrario());
             }
             ImageView img= v.findViewById(R.id.imageViewMonument);
-            Picasso.get().load(p.getImage())
-                    .transform(new CircleTrasform()).into(img);
+            Picasso.get().load(p.getImage()[0])
+                    .resize(600,600)
+                    .transform(new CropCircleTransformation())
+                    .into(img);
             //img.setImageDrawable(new RetriveImageInternet().execute(p.getImage()).get(););
 
 
