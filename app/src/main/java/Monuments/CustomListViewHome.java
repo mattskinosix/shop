@@ -1,4 +1,4 @@
-package c.www.carovignoviva.CustomUtility;
+package Monuments;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import c.www.carovignoviva.Monumento;
 import c.www.carovignoviva.R;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 

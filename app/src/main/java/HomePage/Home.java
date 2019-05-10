@@ -1,9 +1,13 @@
-package c.www.carovignoviva;
+package HomePage;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import Events.HomeEventi;
+import Monuments.HomeMonumenti;
+import c.www.carovignoviva.R;
 
 public class Home extends Activity {
 

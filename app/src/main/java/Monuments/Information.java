@@ -1,4 +1,4 @@
-package c.www.carovignoviva;
+package Monuments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
 
-import c.www.carovignoviva.CustomUtility.ViewPagerAdapter;
+import c.www.carovignoviva.R;
 
 public class Information extends Activity implements OnStreetViewPanoramaReadyCallback {
 
@@ -45,13 +45,7 @@ public class Information extends Activity implements OnStreetViewPanoramaReadyCa
         TextView titolo= findViewById(R.id.titolo_info_complete);
             titolo.setText(city.getNome());
         ViewPager viewPager = findViewById(R.id.Imagepager);
-       String[] imageUrls = new String[]{
-                "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",
-                "https://cdn.pixabay.com/photo/2017/12/21/12/26/glowworm-3031704_960_720.jpg",
-                "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg",
-                "https://cdn.pixabay.com/photo/2017/11/07/00/07/fantasy-2925250_960_720.jpg",
-                "https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"
-        };
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(this, city.getImage());
         viewPager.setAdapter(adapter);
 

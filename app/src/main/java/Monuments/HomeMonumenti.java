@@ -1,4 +1,4 @@
-package c.www.carovignoviva;
+package Monuments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,11 +33,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import c.www.carovignoviva.CustomUtility.CustomInfoWindowGoogleMap;
-import c.www.carovignoviva.CustomUtility.CustomListViewHome;
+import c.www.carovignoviva.R;
 
 public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallback {
     static public final int REQUEST_LOCATION = 1;
@@ -95,9 +95,9 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adattatore, final View componente, int pos, long id) {
-                Double latitude=monumentos.get(pos).getLatitude();
-                latitude+=.0002;
-                Double longitude=monumentos.get(pos).getLongitude();
+                double latitude = monumentos.get(pos).getLatitude() + .0002;
+                double longitude;
+                longitude = monumentos.get(pos).getLongitude();
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 19.0f));
                 monumentos.get(pos).getMarker().showInfoWindow();
                 slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
@@ -177,7 +177,7 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
 
                 try {
                     BufferedReader r1 = new BufferedReader(new InputStreamReader(
-                            ists, "UTF-8"));
+                            ists, StandardCharsets.UTF_8));
                     while ((line = r1.readLine()) != null) {
                         sb.append(line).append("\n");
                     }

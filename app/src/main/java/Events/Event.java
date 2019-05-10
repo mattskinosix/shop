@@ -1,6 +1,4 @@
-package c.www.carovignoviva;
-
-import com.google.android.gms.maps.model.Marker;
+package Events;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -10,7 +10,7 @@
     <string name="close_map_s_fragment">Close map\'s fragment</string>
     <string name="principal_image_in_informazioni_complete">principal image in informazioni complete</string>
     <string name="button_for_navigator">button for navigator</string>
-    <string name="open_street_view_frame">Open street view frame</string>
+    <string name="open_street_view_frame">Street view</string>
     <string name="button">Button</string>
     <string name="carovigno">Carovigno</string>
     <string name="s_sabina">S.Sabina</string>
@@ -22,4 +22,11 @@
     <string name="swide_up">SWide Up</string>
     <string name="image_of_monuments">image of monuments</string>
     <string name="tocca_per_leggere_la_storia">Tocca per leggere la Storia</string>
+    <string name="monumenti">Monumenti</string>
+    <string name="eventi">Eventi</string>
+
+    <string name="ora_inizio_ora_fine">Ora inizio Ora fine</string>
+    <string name="orario_visite">Orario Visite:</string>
+    <string name="portami_qui">Portami Qui</string>
+    <string name="storia">Storia</string>
 </resources>

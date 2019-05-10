@@ -1,4 +1,4 @@
-package c.www.carovignoviva.CustomUtility;
+package Monuments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,18 +14,15 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
-import c.www.carovignoviva.Monumento;
 import c.www.carovignoviva.R;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
-import okhttp3.OkHttpClient;
 
 public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
 
     private final Context context;
     private ArrayList<Monumento> monumenti;
-    public CustomInfoWindowGoogleMap(Context ctx, ArrayList<Monumento> monument){
+    CustomInfoWindowGoogleMap(Context ctx, ArrayList<Monumento> monument){
         monumenti=monument;
         context = ctx;
     }
@@ -62,7 +59,7 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
         return null;
     }
     static class MarkerCallback implements Callback {
-        Marker marker=null;
+        Marker marker;
 
         MarkerCallback(Marker marker) {
             this.marker=marker;
@@ -74,7 +71,7 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter{
             Log.i("ERROR", "image got, should rebuild window");
             if (marker != null && marker.isInfoWindowShown()) {
                 Log.i("OK", "conditions met, redrawing window");
-                marker.setTag(new Boolean("True"));
+                marker.setTag(Boolean.TRUE);
                 marker.showInfoWindow();
             }
         }

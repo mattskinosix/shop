@@ -1,6 +1,7 @@
-package c.www.carovignoviva;
+package Events;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,17 +12,17 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 
 import org.json.JSONException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import c.www.carovignoviva.CustomUtility.CustomListViewEvents;
+import c.www.carovignoviva.R;
 
 public class HomeEventi extends Activity {
     @Override
@@ -31,7 +32,7 @@ public class HomeEventi extends Activity {
 
             //CREO LA LISTA CON I DATI CONTENUTI NEL VETTORE DI MONUMENTI
             ListView listView = findViewById(R.id.Listeventi);
-        ArrayList<Event> events= null;
+        ArrayList<Event> events=null;
         try {
             events = new Event().monumentoFromJson(new GetFromServer().execute().get());
         } catch (JSONException e) {
@@ -41,13 +42,17 @@ public class HomeEventi extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         // creo e istruisco l'adattatore
-            final CustomListViewEvents adapter = new CustomListViewEvents(this, R.layout.evento,events);
+            final CustomListViewEvents adapter = new CustomListViewEvents(this, R.layout.list_item_evento,events);
             listView.setAdapter(adapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final ArrayList<Event> finalEvents = events;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adattatore, final View componente, int pos, long id) {
-
+                    Intent intent = new Intent(HomeEventi.this ,  EventInfo.class);
+                    intent.putExtra("Event", finalEvents.get(pos));
+                    startActivity(intent);
                 }
 
         });
@@ -64,7 +69,7 @@ public class HomeEventi extends Activity {
 
                 try {
                     BufferedReader r1 = new BufferedReader(new InputStreamReader(
-                            ists, "UTF-8"));
+                            ists, StandardCharsets.UTF_8));
                     while ((line = r1.readLine()) != null) {
                         sb.append(line).append("\n");
                     }

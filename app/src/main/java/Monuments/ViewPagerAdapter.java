@@ -1,4 +1,4 @@
-package c.www.carovignoviva.CustomUtility;
+package Monuments;
 
 import android.content.Context;
 import android.view.View;
@@ -39,7 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         Picasso.get()
                 .load(imageUrls[position])
                 .fit()
-                .transform(new RoundedCornersTransformation(50,50))
+                .transform(new RoundedCornersTransformation(50,5))
                 .centerCrop()
                 .into(imageView);
         container.addView(imageView);
