@@ -34,7 +34,7 @@ public class HomeEventi extends Activity {
             ListView listView = findViewById(R.id.Listeventi);
         ArrayList<Event> events=null;
         try {
-            events = new Event().monumentoFromJson(new GetFromServer().execute().get());
+            events = new Event().eventoFromJson(new GetFromServer().execute().get());
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

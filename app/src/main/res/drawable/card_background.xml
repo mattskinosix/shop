@@ -40,12 +40,13 @@
     </item>
 
     <!-- Background -->
-    <item>
+    <item android:id="@+id/forma">
+
         <shape>
+
             <size
                 android:width="50dp"
                 android:height="82dp" />
-
             <solid android:color="#515d89" />
             <corners android:radius="20dp" />
         </shape>

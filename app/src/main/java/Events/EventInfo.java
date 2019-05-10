@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import c.www.carovignoviva.R;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class EventInfo extends Activity  {
 
@@ -27,13 +28,14 @@ public class EventInfo extends Activity  {
         Intent intent=getIntent();
             event =(Event)intent.getSerializableExtra("Event");
             TextView text= findViewById(R.id.descrizione_info_evento);
-        text.setText(event.getNome());
+        text.setText(event.getDescription());
         TextView titolo= findViewById(R.id.titolo_info_evento);
             titolo.setText(event.getNome());
 
         ImageView img = findViewById(R.id.image_evento);
         Picasso.get().load(event.getImage())
-        .into(img);
+                .transform(new RoundedCornersTransformation(50,2))
+                .into(img);
         ImageButton navigatore= findViewById(R.id.navigatore_evento);
             navigatore.setOnClickListener(new View.OnClickListener() {
             @Override

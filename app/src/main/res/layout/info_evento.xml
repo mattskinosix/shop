@@ -20,7 +20,7 @@
             android:id="@+id/image_evento"
             android:layout_width="match_parent"
             android:layout_height="262dp"
-            android:contentDescription="Immagine evento">
+            android:contentDescription="@string/immagine_evento">
 
         </ImageView>
 
@@ -31,9 +31,8 @@
 
             <ImageButton
                 android:id="@+id/navigatore_evento"
-                android:layout_width="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginStart="90dp"
                 android:backgroundTint="@android:color/transparent"
                 android:contentDescription="@string/button_for_navigator"
                 android:src="@drawable/ic_round_navigation_24px" />
@@ -47,12 +46,12 @@
 
             <TextView
                 android:id="@+id/navigatore_evento_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="75dp"
                 android:backgroundTint="@android:color/transparent"
                 android:contentDescription="@string/button_for_navigator"
                 android:text="@string/portami_qui"
+                android:textAlignment="center"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         </LinearLayout>
@@ -67,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
-                android:text="Descrizione"
+                android:text="@string/descrizione"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="24sp" />
 

@@ -29,4 +29,6 @@
     <string name="orario_visite">Orario Visite:</string>
     <string name="portami_qui">Portami Qui</string>
     <string name="storia">Storia</string>
+    <string name="immagine_evento">Immagine evento</string>
+    <string name="descrizione">Descrizione</string>
 </resources>

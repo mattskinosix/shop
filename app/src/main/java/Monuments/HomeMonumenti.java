@@ -12,9 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.fragment.app.FragmentActivity;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -40,7 +38,8 @@ import java.util.concurrent.ExecutionException;
 import c.www.carovignoviva.R;
 
 public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallback {
-    static public final int REQUEST_LOCATION = 1;
+
+
     SlidingUpPanelLayout slidingUpPanelLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,9 +131,11 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
                 }
             });
         } else {
-            addMarker(monumenti, googleMap);
-            creaLista(monumenti, googleMap);
-            setCustomInfoWindows(googleMap, monumenti);
+            if (monumenti!=null) {
+                addMarker(monumenti, googleMap);
+                creaLista(monumenti, googleMap);
+                setCustomInfoWindows(googleMap, monumenti);
+            }
         }
     }
 

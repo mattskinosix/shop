@@ -14,8 +14,9 @@ public class Event implements Serializable {
     private String ora_inizio;
     private String ora_fine;
     private String image;
+    private String description;
 
-    public ArrayList<Event> monumentoFromJson(String json) throws JSONException {
+    ArrayList<Event> eventoFromJson(String json) throws JSONException {
         JSONArray jsonarray = new JSONArray(json);
         ArrayList<Event> events=new ArrayList<> ();
         for (int i = 0; i < jsonarray.length(); i++) {
@@ -27,6 +28,7 @@ public class Event implements Serializable {
             evento.ora_inizio= jsonobject.getString("ora_inizio");
             evento.ora_fine= jsonobject.getString("ora_fine");
             evento.image=jsonobject.getString("immagine");
+            evento.description=jsonobject.getString("descrizione");
 
             events.add(evento);
         }
@@ -37,23 +39,27 @@ public class Event implements Serializable {
         return codice;
     }
 
-    public String getNome() {
+    String getNome() {
         return nome;
     }
 
-    public String getLuogo() {
+    String getLuogo() {
         return luogo;
     }
 
-    public String getOra_inizio() {
+    String getOra_inizio() {
         return ora_inizio;
     }
 
-    public String getOra_fine() {
+    String getOra_fine() {
         return ora_fine;
     }
 
-    public String getImage() {
+    String getImage() {
         return image;
+    }
+
+    String getDescription() {
+        return description;
     }
 }
