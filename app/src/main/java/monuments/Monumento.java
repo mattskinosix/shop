@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 class Monumento implements Serializable {
@@ -20,7 +21,7 @@ class Monumento implements Serializable {
     private String[] image=new String[4];
     private String detail;
     private String orario;
-    private  float distance;
+    private float distance;
     private transient Marker marker;
 
 
@@ -49,13 +50,14 @@ class Monumento implements Serializable {
 
     void setDistanceToMonument(double lat_a, double lng_a) {
 
-        double earthRadius = 6371000; //meters
+        double earthRadius = 6371; //meters
         double dLat = Math.toRadians(latitude-lat_a);
         double dLng = Math.toRadians(longitude-lng_a);
         double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                 Math.cos(Math.toRadians(lat_a)) * Math.cos(Math.toRadians(latitude)) *
                         Math.sin(dLng/2) * Math.sin(dLng/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
         distance= (float) (earthRadius * c);
     }
 

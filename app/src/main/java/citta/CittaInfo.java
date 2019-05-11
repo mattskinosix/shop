@@ -1,4 +1,4 @@
-package events;
+package citta;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,10 +14,10 @@ import com.squareup.picasso.Picasso;
 import c.www.carovignoviva.R;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
-public class EventInfo extends Activity  {
+public class CittaInfo extends Activity  {
 
 
-    Event event;
+    Citta citta;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +26,21 @@ public class EventInfo extends Activity  {
 
 
         Intent intent=getIntent();
-            event =(Event)intent.getSerializableExtra("Citta");
+            citta =(Citta)intent.getSerializableExtra("Citta");
             TextView text= findViewById(R.id.descrizione_info_evento);
-        text.setText(event.getDescription());
+        text.setText(citta.getDescription());
         TextView titolo= findViewById(R.id.titolo_info_evento);
-            titolo.setText(event.getNome());
+            titolo.setText(citta.getNome());
 
         ImageView img = findViewById(R.id.image_evento);
-        Picasso.get().load(event.getImage())
+        Picasso.get().load(citta.getImage())
                 .transform(new RoundedCornersTransformation(50,2))
                 .into(img);
         ImageButton navigatore= findViewById(R.id.navigatore_evento);
             navigatore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:0,0?q="+ event.getLuogo());
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q="+ citta.getNome());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);

@@ -1,7 +1,10 @@
-package Monuments;
+package monuments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -12,7 +15,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -20,6 +27,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.json.JSONException;
@@ -38,13 +46,53 @@ import java.util.concurrent.ExecutionException;
 import c.www.carovignoviva.R;
 
 public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallback {
+    ArrayList<Monumento> monumenti;
 
+    {
+        try {
+            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute().get(), getBaseContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private FusedLocationProviderClient fusedLocationClient;
     SlidingUpPanelLayout slidingUpPanelLayout;
+    private GoogleMap mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    Activity#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for Activity#requestPermissions for more details.
+            return;
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            double lat = location.getLatitude();
+                            double lon = location.getLongitude();
+                            setDistances(lat, lon);
+                            creaLista();
+
+                        }
+                    }
+                });
         if (!isOnline()) {
             setContentView(R.layout.error_network);
             TextView textView = findViewById(R.id.errorview);
@@ -84,36 +132,39 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
         return (networkInfo != null && networkInfo.isConnected());
     }
 
-    private void creaLista(final ArrayList<Monumento> monumentos, final GoogleMap mMap){
+    private void creaLista( ){
         //CREO LA LISTA CON I DATI CONTENUTI NEL VETTORE DI MONUMENTI
         ListView listView = findViewById(R.id.listv);
-
+        monumenti.sort(new ComparatorDistance());
         // creo e istruisco l'adattatore
-        final CustomListViewHome adapter = new CustomListViewHome(this, R.layout.listitem, monumentos);
+        final CustomListViewHome adapter = new CustomListViewHome(this, R.layout.listitem, monumenti);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adattatore, final View componente, int pos, long id) {
-                double latitude = monumentos.get(pos).getLatitude() + .0002;
+                double latitude = monumenti.get(pos).getLatitude() + .0002;
                 double longitude;
-                longitude = monumentos.get(pos).getLongitude();
+                longitude = monumenti.get(pos).getLongitude();
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 19.0f));
-                monumentos.get(pos).getMarker().showInfoWindow();
+                monumenti.get(pos).getMarker().showInfoWindow();
                 slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
         });
 
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap=googleMap;
         ArrayList<Monumento> monumenti = null;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.setMyLocationEnabled(true);
         //ESPANDO IL PANNELLO SLIDING
+
+
         slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         try {
             //CARICO I MONUMENTI DALLA PAGINA PHP
-            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute().get());
+            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute().get(),getBaseContext());
         } catch (JSONException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -132,14 +183,14 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
             });
         } else {
             if (monumenti!=null) {
-                addMarker(monumenti, googleMap);
-                creaLista(monumenti, googleMap);
-                setCustomInfoWindows(googleMap, monumenti);
+                addMarker( );
+                setCustomInfoWindows();
             }
+
         }
     }
 
-    private void setCustomInfoWindows(GoogleMap mMap, final  ArrayList<Monumento> monumenti) {
+    private void setCustomInfoWindows() {
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this,monumenti);
         mMap.setInfoWindowAdapter(customInfoWindow);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -150,16 +201,22 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
                 int i=0;
                 //TO DO
                 while (!arg0.getTitle().equals(monumenti.get(i).getMarker().getTitle())) i++;
-                intent.putExtra("City",monumenti.get(i));
+                intent.putExtra("monumenti",monumenti.get(i));
                 startActivity(intent);
             }
         });
 
     }
 
+    private void setDistances(double lat,double lon){
+        for (Monumento monumento : monumenti) {
+            monumento.setDistanceToMonument(lat,lon);
+            }
+    }
 
 
-    private void addMarker(ArrayList<Monumento> monumenti, GoogleMap mMap){
+
+    private void addMarker( ){
         for (Monumento monumento : monumenti) {
             monumento.setMarker(mMap.addMarker(new MarkerOptions()
                     .title(monumento.getNome())

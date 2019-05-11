@@ -31,7 +31,7 @@ public class Information extends Activity implements OnStreetViewPanoramaReadyCa
 
 
         Intent intent=getIntent();
-            city=(Monumento)intent.getSerializableExtra("City");
+            city=(Monumento)intent.getSerializableExtra("monumenti");
 
 
             //   TextView description = view.findViewById(R.id.description);

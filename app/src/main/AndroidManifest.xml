@@ -29,5 +29,7 @@
         <activity android:name="events.HomeEventi" />
         <activity android:name="monuments.HomeMonumenti" />
         <activity android:name="events.EventInfo" />
+        <activity android:name="citta.HomeCitta" />
+        <activity android:name="citta.CittaInfo" />
     </application>
 </manifest>

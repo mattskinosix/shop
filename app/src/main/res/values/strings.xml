@@ -31,4 +31,9 @@
     <string name="storia">Storia</string>
     <string name="immagine_evento">Immagine evento</string>
     <string name="descrizione">Descrizione</string>
+    <string name="castello_carovigno">Castello carovigno</string>
+    <string name="bottone_eventi">Bottone eventi</string>
+    <string name="citt_vicine">Città vicine</string>
+    <string name="stemma_carovigno">Stemma Carovigno</string>
+    <string name="bottone">bottone</string>
 </resources>

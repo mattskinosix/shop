@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import citta.HomeCitta;
 import events.HomeEventi;
 import monuments.HomeMonumenti;
 import c.www.carovignoviva.R;
@@ -14,23 +15,21 @@ public class Home extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
         setContentView(R.layout.home);
-        View castello = findViewById(R.id.castello);
-        castello.setOnClickListener(castleButton);
-        View mare =findViewById(R.id.mare);
-        mare.setOnClickListener(mareButton);
+        View monumento = findViewById(R.id.button_monumenti);
+        monumento.setOnClickListener(monumentsButtonListener);
+        View events =findViewById(R.id.button_events);
+        events.setOnClickListener(eventsButtonListener);
+        View citta =findViewById(R.id.button_citta);
+        citta.setOnClickListener(cittaButtonListener);
     }
 
 
 
 
-    private View.OnClickListener castleButton = new View.OnClickListener() {
+    private View.OnClickListener monumentsButtonListener = new View.OnClickListener() {
         public void onClick(View arg0) {
-            if (arg0.getId() == R.id.castello) {
+            if (arg0.getId() == R.id.button_monumenti) {
                 //define a new Intent for the second Activity
                 Intent intent = new Intent(Home.this , HomeMonumenti.class);
                 //start the second Activity
@@ -41,9 +40,9 @@ public class Home extends Activity {
         }
     };
 
-    private View.OnClickListener mareButton = new View.OnClickListener() {
+    private View.OnClickListener eventsButtonListener = new View.OnClickListener() {
         public void onClick(View arg0) {
-            if (arg0.getId() == R.id.mare) {
+            if (arg0.getId() == R.id.button_events) {
                 //define a new Intent for the second Activity
                 Intent intent = new Intent(Home.this, HomeEventi.class);
                 //start the second Activity
@@ -51,7 +50,24 @@ public class Home extends Activity {
 
             }
 
+
         }
+
+    };
+
+    private View.OnClickListener cittaButtonListener = new View.OnClickListener() {
+        public void onClick(View arg0) {
+            if (arg0.getId() == R.id.button_citta) {
+                //define a new Intent for the second Activity
+                Intent intent = new Intent(Home.this, HomeCitta.class);
+                //start the second Activity
+                startActivity(intent);
+
+            }
+
+
+        }
+
     };
 
 
