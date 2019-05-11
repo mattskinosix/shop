@@ -1,4 +1,4 @@
-package Events;
+package events;
 
 import android.app.Activity;
 import android.content.Intent;

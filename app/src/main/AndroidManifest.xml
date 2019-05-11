@@ -2,6 +2,7 @@
     package="c.www.carovignoviva">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
@@ -15,7 +16,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity android:name="HomePage.Home"
+        <activity android:name="homepage.Home"
         android:theme="@style/MatherialOrang">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -24,9 +25,9 @@
 
         </intent-filter>
         </activity>
-        <activity android:name="Monuments.Information" />
-        <activity android:name="Events.HomeEventi" />
-        <activity android:name="Monuments.HomeMonumenti" />
-        <activity android:name="Events.EventInfo" />
+        <activity android:name="monuments.Information" />
+        <activity android:name="events.HomeEventi" />
+        <activity android:name="monuments.HomeMonumenti" />
+        <activity android:name="events.EventInfo" />
     </application>
 </manifest>

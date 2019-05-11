@@ -1,4 +1,4 @@
-package Events;
+package events;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,12 +18,13 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class CustomListViewEvents extends ArrayAdapter<Event> {
     private int  resourceLayout;
     private Context mContext;
-    public CustomListViewEvents(Context context, int textViewResourceId,
-                                ArrayList <Event> objects) {
+    CustomListViewEvents(Context context, int textViewResourceId,
+                         ArrayList<Event> objects) {
         super(context, textViewResourceId, objects);
         mContext=context;
         resourceLayout=textViewResourceId;
     }
+
 
 
     @Override

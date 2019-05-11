@@ -1,4 +1,6 @@
-package Monuments;
+package monuments;
+
+import android.content.Context;
 
 import com.google.android.gms.maps.model.Marker;
 
@@ -9,19 +11,20 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-public class Monumento  implements Serializable {
+class Monumento implements Serializable {
     private String codice;
     private String nome;
-    private Double longitude;
-    private Double latitude;
+    private double longitude;
+    private double latitude;
     private String description;
     private String[] image=new String[4];
     private String detail;
     private String orario;
+    private  float distance;
     private transient Marker marker;
 
-    public ArrayList<Monumento>  monumentoFromJson(String json) throws JSONException {
+
+    ArrayList<Monumento>  monumentoFromJson(String json, Context context) throws JSONException {
         JSONArray jsonarray = new JSONArray(json);
         ArrayList<Monumento> monumenti=new ArrayList<> ();
         for (int i = 0; i < jsonarray.length(); i++) {
@@ -38,48 +41,67 @@ public class Monumento  implements Serializable {
             monumento.image[1]=jsonobject.getString("img2");
             monumento.image[2]=jsonobject.getString("img3");
             monumento.image[3]=jsonobject.getString("img4");
+
             monumenti.add(monumento);
         }
         return monumenti;
     }
 
-    public String getCodice() {
+    void setDistanceToMonument(double lat_a, double lng_a) {
+
+        double earthRadius = 6371000; //meters
+        double dLat = Math.toRadians(latitude-lat_a);
+        double dLng = Math.toRadians(longitude-lng_a);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat_a)) * Math.cos(Math.toRadians(latitude)) *
+                        Math.sin(dLng/2) * Math.sin(dLng/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        distance= (float) (earthRadius * c);
+    }
+
+    String getCodice() {
         return codice;
     }
 
-    public String getNome() {
+    String getNome() {
         return nome;
     }
 
-    public double getLongitude() {
+    double getLongitude() {
         return longitude;
     }
 
-    public double getLatitude() {
+    double getLatitude() {
         return latitude;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public String[] getImage() {
+    String[] getImage() {
         return image;
     }
 
-    public String getDetail() {
+    String getDetail() {
         return detail;
     }
 
-    public String getOrario() {
+    String getOrario() {
         return orario;
     }
 
-    public Marker getMarker() {
+    Marker getMarker() {
         return marker;
     }
 
-    public void setMarker(Marker marker) {
+    void setMarker(Marker marker) {
         this.marker = marker;
     }
+
+    float getDistance() {
+        return distance;
+    }
+
+
 }

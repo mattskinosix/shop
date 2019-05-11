@@ -1,4 +1,4 @@
-package Monuments;
+package monuments;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -49,7 +49,8 @@ public class CustomListViewHome extends ArrayAdapter<Monumento> {
 
             TextView ttvisite = v.findViewById(R.id.textViewListVisite);
             TextView tt2 = v.findViewById(R.id.TextViewListTitle);
-
+            TextView distance = v.findViewById(R.id.distance);
+            distance.setText(Float.toString(p.getDistance()));
             if (tt2 != null) {
                 tt2.setText(p.getNome());
             }
