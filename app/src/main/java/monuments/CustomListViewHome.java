@@ -4,17 +4,21 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.core.content.ContextCompat;
+
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
 import c.www.carovignoviva.R;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
@@ -53,7 +57,10 @@ public class CustomListViewHome extends ArrayAdapter<Monumento> {
             TextView tt2 = v.findViewById(R.id.TextViewListTitle);
             TextView distance = v.findViewById(R.id.distance);
             DecimalFormat df = new DecimalFormat("0.00");
-            distance.setText(df.format(p.getDistance())+" KM");
+            if (p.getDistance()!=0) {
+                Log.wtf("EEEEEEEEEEEEEEEEEEEEE", Float.toString(p.getDistance()));
+                distance.setText(df.format(p.getDistance())+" KM");
+            }
             if (tt2 != null) {
                 tt2.setText(p.getNome());
             }

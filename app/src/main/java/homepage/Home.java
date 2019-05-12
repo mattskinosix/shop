@@ -2,13 +2,15 @@ package homepage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 
+import c.www.carovignoviva.R;
 import citta.HomeCitta;
 import events.HomeEventi;
 import monuments.HomeMonumenti;
-import c.www.carovignoviva.R;
 
 public class Home extends Activity {
 
@@ -23,7 +25,6 @@ public class Home extends Activity {
         View citta =findViewById(R.id.button_citta);
         citta.setOnClickListener(cittaButtonListener);
     }
-
 
 
 

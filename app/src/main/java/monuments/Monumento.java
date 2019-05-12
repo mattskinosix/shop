@@ -42,7 +42,7 @@ class Monumento implements Serializable {
             monumento.image[1]=jsonobject.getString("img2");
             monumento.image[2]=jsonobject.getString("img3");
             monumento.image[3]=jsonobject.getString("img4");
-
+            monumento.distance=0;
             monumenti.add(monumento);
         }
         return monumenti;
@@ -57,7 +57,6 @@ class Monumento implements Serializable {
                 Math.cos(Math.toRadians(lat_a)) * Math.cos(Math.toRadians(latitude)) *
                         Math.sin(dLng/2) * Math.sin(dLng/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
         distance= (float) (earthRadius * c);
     }
 

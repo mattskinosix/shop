@@ -1,25 +1,28 @@
 package monuments;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -27,104 +30,94 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.json.JSONException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.InetAddress;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import Server.GetFromServer;
 import c.www.carovignoviva.R;
 
-public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallback {
-    ArrayList<Monumento> monumenti;
+public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    LocationManager locationManager;
+    String provider;
 
-    {
-        try {
-            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute().get(), getBaseContext());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    private ArrayList<Monumento> monumenti=new ArrayList<Monumento>();
 
-    private FusedLocationProviderClient fusedLocationClient;
     SlidingUpPanelLayout slidingUpPanelLayout;
     private GoogleMap mMap;
+    Location location;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    Activity#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return;
-        }
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            double lat = location.getLatitude();
-                            double lon = location.getLongitude();
-                            setDistances(lat, lon);
-                            creaLista();
+        boolean reachable=false;
 
-                        }
-                    }
-                });
         if (!isOnline()) {
-            setContentView(R.layout.error_network);
-            TextView textView = findViewById(R.id.errorview);
-            textView.setText("intetnet è spento");
-            Button button= findViewById(R.id.refresh);
-            button.setOnClickListener(new View.OnClickListener(){
+            error();
 
-                @Override
-                public void onClick(View v) {
-                    finish();
-                    startActivity(getIntent());
-                }
-            });
-        } else {
+        }else {
+        checkLocationPermission();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        provider = locationManager.getBestProvider(new Criteria(), false);
+
+        if(provider!=null) location = locationManager.getLastKnownLocation(provider);
+
+
+
             setContentView(R.layout.slideup);
             MapFragment mapFragment = MapFragment.newInstance();
             getFragmentManager().beginTransaction().add(R.id.map, mapFragment).commit();
             mapFragment.getMapAsync(this);
             slidingUpPanelLayout = findViewById(R.id.sliding_layout);
-        }
 
     }
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("http://79.42.27.192:8000/");
-            //You can replace it with your name
-            return !ipAddr.equals("");
+        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
 
-        } catch (Exception e) {
-            return false;
+    if(provider!=null)            locationManager.requestLocationUpdates(provider, 400, 1, this);
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+if(locationManager!=null)  locationManager.removeUpdates(this);
+        }
+    }
+    private void error(){
+        setContentView(R.layout.error_network);
+        TextView textView = findViewById(R.id.errorview);
+        textView.setText("intetnet è spento");
+        Button button= findViewById(R.id.refresh);
+        button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
+    }
+
     public boolean isOnline() {
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -155,41 +148,98 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap=googleMap;
-        ArrayList<Monumento> monumenti = null;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.setMyLocationEnabled(true);
+        if(provider!=null) googleMap.setMyLocationEnabled(true);
         //ESPANDO IL PANNELLO SLIDING
-
-
         slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         try {
             //CARICO I MONUMENTI DALLA PAGINA PHP
-            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute().get(),getBaseContext());
+            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute("carovigno.php").get(),getBaseContext());
+            if(provider!=null) setDistances(location.getLatitude(),location.getLongitude());
         } catch (JSONException | InterruptedException | ExecutionException e) {
+
             e.printStackTrace();
         }
-        if (!isInternetAvailable() && isOnline() && monumenti==null) {
-            setContentView(R.layout.error_network);
-            TextView textView = findViewById(R.id.errorview);
-            textView.setText("server rotto");
-            Button button= findViewById(R.id.refresh);
-            button.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-                    finish();
-                    startActivity(getIntent());
-                }
-            });
-        } else {
             if (monumenti!=null) {
                 addMarker( );
+                creaLista();
                 setCustomInfoWindows();
             }
 
         }
+
+
+
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.title_location_permission)
+                        .setMessage(R.string.text_location_permission)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(HomeMonumenti.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        //Request location updates:
+                        if (provider!=null)
+                            locationManager.requestLocationUpdates(provider, 400, 1, this);
+                    }
+
+                } else {
+
+                }
+                return;
+            }
+
+        }
+
+    }
     private void setCustomInfoWindows() {
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this,monumenti);
         mMap.setInfoWindowAdapter(customInfoWindow);
@@ -225,57 +275,23 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
     }
 
 
-    private static  class  GetFromServer extends AsyncTask<Void, Void, String> {
-        private String dati;
-
-        private String mostroDati(InputStream ists) throws IOException {
-            if (ists != null) {
-                StringBuilder sb = new StringBuilder();
-                String line;
-
-                try {
-                    BufferedReader r1 = new BufferedReader(new InputStreamReader(
-                            ists, StandardCharsets.UTF_8));
-                    while ((line = r1.readLine()) != null) {
-                        sb.append(line).append("\n");
-                    }
-                } finally {
-                    ists.close();
-                }
-                return sb.toString();
-            } else {
-                return "";
-            }
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            String datiLetti = "ciao";
-            try {
-
-                // Creao l'oggetto URL che rappresenta l'indirizzo della pagina da richiamare
-                URL paginaURL = new URL("http://79.42.27.192:8000/carovigno.php");
-
-                // creo l'oggetto HttpURLConnection e apro la connessione al server
-                HttpURLConnection client = (HttpURLConnection) paginaURL.openConnection();
-                client.setAllowUserInteraction(false);
-                client.setInstanceFollowRedirects(true);
-                client.setRequestMethod("GET");
-                client.connect();
-                // Recupero le Information inviate dal server
-                InputStream risposta = client.getInputStream();
-                datiLetti = mostroDati(risposta);
-                Log.i("CIAO", datiLetti);
-            } catch (Exception e) {
-                Log.i("CIAO", "ECCEZIONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-                e.printStackTrace();
-            }
-            //strings[0]=datiLetti;
-
-            return datiLetti;
-        }
-
+    @Override
+    public void onLocationChanged(Location location) {
 
     }
 
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

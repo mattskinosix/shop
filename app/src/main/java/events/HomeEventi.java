@@ -22,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import Server.GetFromServer;
 import c.www.carovignoviva.R;
 
 public class HomeEventi extends Activity {
@@ -34,7 +35,7 @@ public class HomeEventi extends Activity {
             ListView listView = findViewById(R.id.Listeventi);
         ArrayList<Event> events=null;
         try {
-            events = new Event().eventoFromJson(new GetFromServer().execute().get());
+            events = new Event().eventoFromJson(new GetFromServer().execute("events.php").get());
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -59,56 +60,5 @@ public class HomeEventi extends Activity {
 
     }
 
-    private static  class  GetFromServer extends AsyncTask<Void, Void, String> {
-        private String dati;
 
-        private String mostroDati(InputStream ists) throws IOException {
-            if (ists != null) {
-                StringBuilder sb = new StringBuilder();
-                String line;
-
-                try {
-                    BufferedReader r1 = new BufferedReader(new InputStreamReader(
-                            ists, StandardCharsets.UTF_8));
-                    while ((line = r1.readLine()) != null) {
-                        sb.append(line).append("\n");
-                    }
-                } finally {
-                    ists.close();
-                }
-                return sb.toString();
-            } else {
-                return "";
-            }
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            String datiLetti = "ciao";
-            try {
-
-                // Creao l'oggetto URL che rappresenta l'indirizzo della pagina da richiamare
-                URL paginaURL = new URL("http://79.42.27.192:8000/events.php");
-
-                // creo l'oggetto HttpURLConnection e apro la connessione al server
-                HttpURLConnection client = (HttpURLConnection) paginaURL.openConnection();
-                client.setAllowUserInteraction(false);
-                client.setInstanceFollowRedirects(true);
-                client.setRequestMethod("GET");
-                client.connect();
-                // Recupero le Information inviate dal server
-                InputStream risposta = client.getInputStream();
-                datiLetti = mostroDati(risposta);
-                Log.i("CIAO", datiLetti);
-            } catch (Exception e) {
-                Log.i("CIAO", "ECCEZIONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-                e.printStackTrace();
-            }
-            //strings[0]=datiLetti;
-
-            return datiLetti;
-        }
-
-
-    }
 }
