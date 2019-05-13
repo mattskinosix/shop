@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,8 +35,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.json.JSONException;
 
-import java.io.IOException;
-import java.net.InetAddress;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -47,7 +47,7 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
     LocationManager locationManager;
     String provider;
 
-    private ArrayList<Monumento> monumenti=new ArrayList<Monumento>();
+    private ArrayList<Monumento> monumenti= new ArrayList<>();
 
     SlidingUpPanelLayout slidingUpPanelLayout;
     private GoogleMap mMap;
@@ -128,7 +128,8 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
     private void creaLista( ){
         //CREO LA LISTA CON I DATI CONTENUTI NEL VETTORE DI MONUMENTI
         ListView listView = findViewById(R.id.listv);
-        monumenti.sort(new ComparatorDistance());
+
+        if (Build.VERSION.SDK_INT >= 24)monumenti.sort(new ComparatorDistance());
         // creo e istruisco l'adattatore
         final CustomListViewHome adapter = new CustomListViewHome(this, R.layout.listitem, monumenti);
         listView.setAdapter(adapter);
@@ -155,7 +156,7 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
         try {
             //CARICO I MONUMENTI DALLA PAGINA PHP
             monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute("carovigno.php").get(),getBaseContext());
-            if(provider!=null) setDistances(location.getLatitude(),location.getLongitude());
+            if(provider!=null && location!=null) setDistances(location.getLatitude(),location.getLongitude());
         } catch (JSONException | InterruptedException | ExecutionException e) {
 
             e.printStackTrace();

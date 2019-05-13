@@ -34,18 +34,21 @@ public class ViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        ImageView imageView = new ImageView(context);
-        Picasso.get()
-                .load(imageUrls[position])
-                .fit()
-                .transform(new RoundedCornersTransformation(50,5))
-                .centerCrop()
-                .into(imageView);
-        container.addView(imageView);
+        if (imageUrls[position] != "") {
+            ImageView imageView = new ImageView(context);
+            Picasso.get()
+                    .load(imageUrls[position])
+                    .fit()
+                    .transform(new RoundedCornersTransformation(50, 5))
+                    .centerCrop()
+                    .into(imageView);
+            container.addView(imageView);
 
-        return imageView;
+            return imageView;
+        }
+        //TODO:Fare lista invece che 4 imagini statiche
+        return null;
     }
-
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
