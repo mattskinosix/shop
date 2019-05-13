@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -150,7 +151,16 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
     public void onMapReady(GoogleMap googleMap) {
         mMap=googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
         if(provider!=null) googleMap.setMyLocationEnabled(true);
+        ImageButton slideup=findViewById(R.id.button_up);
+        slideup.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+            }
+        });
         //ESPANDO IL PANNELLO SLIDING
         slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         try {
