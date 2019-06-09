@@ -1,4 +1,4 @@
-package monuments;
+package c.www.carovignoviva.monuments;
 
 import android.content.Context;
 
@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 class Monumento implements Serializable {

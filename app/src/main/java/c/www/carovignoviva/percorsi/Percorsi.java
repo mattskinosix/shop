@@ -1,4 +1,4 @@
-package percorsi;
+package c.www.carovignoviva.percorsi;
 
 import android.app.Activity;
 import android.os.Bundle;

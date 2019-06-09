@@ -1,4 +1,4 @@
-package events;
+package c.www.carovignoviva.events;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package citta;
+package c.www.carovignoviva.events;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import c.www.carovignoviva.R;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-public class CustomListViewCitta extends ArrayAdapter<Citta> {
+public class CustomListViewEvents extends ArrayAdapter<Event> {
     private int  resourceLayout;
     private Context mContext;
-    CustomListViewCitta(Context context, int textViewResourceId,
-                        ArrayList<Citta> objects) {
+    CustomListViewEvents(Context context, int textViewResourceId,
+                         ArrayList<Event> objects) {
         super(context, textViewResourceId, objects);
         mContext=context;
         resourceLayout=textViewResourceId;
@@ -37,15 +37,21 @@ public class CustomListViewCitta extends ArrayAdapter<Citta> {
             v = vi.inflate(resourceLayout, null);
         }
 
-        Citta p = getItem(position);
+        Event p = getItem(position);
 
         if (p != null) {
-            TextView tt2 = v.findViewById(R.id.TextViewListTitleCitta);
+            TextView ttvisite = v.findViewById(R.id.textViewListVisiteEvent);
+            TextView ttvisite2 = v.findViewById(R.id.textViewListVisiteEvent2);
+            TextView tt2 = v.findViewById(R.id.TextViewListTitleEvent);
 
             if (tt2 != null) {
                 tt2.setText(p.getNome());
            }
 
+            if (ttvisite != null) {
+                ttvisite.setText(p.getOra_inizio());
+                ttvisite2.setText(p.getOra_fine());
+            }
             ImageView img= v.findViewById(R.id.imageViewMonumentEvent);
             Picasso.get().load(p.getImage())
                     .resize(600,600)

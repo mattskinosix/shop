@@ -1,4 +1,4 @@
-package monuments;
+package c.www.carovignoviva.monuments;
 
 import android.app.Activity;
 import android.content.Intent;

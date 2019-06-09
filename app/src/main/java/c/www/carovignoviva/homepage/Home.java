@@ -1,16 +1,14 @@
-package homepage;
+package c.www.carovignoviva.homepage;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Criteria;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 
 import c.www.carovignoviva.R;
-import citta.HomeCitta;
-import events.HomeEventi;
-import monuments.HomeMonumenti;
+import c.www.carovignoviva.citta.HomeCitta;
+import c.www.carovignoviva.events.HomeEventi;
+import c.www.carovignoviva.monuments.HomeMonumenti;
 
 public class Home extends Activity {
 

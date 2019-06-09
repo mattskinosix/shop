@@ -1,4 +1,4 @@
-package monuments;
+package c.www.carovignoviva.monuments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

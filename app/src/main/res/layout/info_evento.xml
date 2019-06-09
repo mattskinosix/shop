@@ -70,6 +70,12 @@
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="24sp" />
 
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:background="?android:attr/listDivider" />
+
             <TextView
                 android:id="@+id/descrizione_info_evento"
                 android:layout_width="match_parent"

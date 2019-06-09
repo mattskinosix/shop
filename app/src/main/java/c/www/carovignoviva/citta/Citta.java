@@ -1,4 +1,4 @@
-package citta;
+package c.www.carovignoviva.citta;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package monuments;
+package c.www.carovignoviva.monuments;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -40,7 +40,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import Server.GetFromServer;
+import c.www.carovignoviva.Server.GetFromServer;
 import c.www.carovignoviva.R;
 
 public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallback, LocationListener {
@@ -48,49 +48,47 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
     LocationManager locationManager;
     String provider;
 
-    private ArrayList<Monumento> monumenti= new ArrayList<>();
+    private ArrayList<Monumento> monumenti = new ArrayList<>();
 
     SlidingUpPanelLayout slidingUpPanelLayout;
     private GoogleMap mMap;
     Location location;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean reachable=false;
+        boolean reachable = false;
 
         if (!isOnline()) {
             error();
+        } else {
 
-        }else {
-        checkLocationPermission();
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        provider = locationManager.getBestProvider(new Criteria(), false);
-
-        if(provider!=null) location = locationManager.getLastKnownLocation(provider);
-
-
-
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            provider = locationManager.getBestProvider(new Criteria(), false);
+            try {
+                //CARICO I MONUMENTI DALLA PAGINA PHP
+                monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute("carovigno.php").get(), getBaseContext());
+                if (provider != null && location != null && adapter != null)
+                    setDistances(location.getLatitude(), location.getLongitude());
+            } catch (JSONException | InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
             setContentView(R.layout.slideup);
             MapFragment mapFragment = MapFragment.newInstance();
             getFragmentManager().beginTransaction().add(R.id.map, mapFragment).commit();
             mapFragment.getMapAsync(this);
             slidingUpPanelLayout = findViewById(R.id.sliding_layout);
-
-    }
         }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-
-    if(provider!=null)            locationManager.requestLocationUpdates(provider, 400, 1, this);
+            if (provider != null) locationManager.requestLocationUpdates(provider, 400, 1, this);
         }
     }
 
@@ -101,15 +99,16 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
-if(locationManager!=null)  locationManager.removeUpdates(this);
+            if (locationManager != null) locationManager.removeUpdates(this);
         }
     }
-    private void error(){
+
+    private void error() {
         setContentView(R.layout.error_network);
         TextView textView = findViewById(R.id.errorview);
         textView.setText("intetnet è spento");
-        Button button= findViewById(R.id.refresh);
-        button.setOnClickListener(new View.OnClickListener(){
+        Button button = findViewById(R.id.refresh);
+        button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -126,13 +125,14 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
         return (networkInfo != null && networkInfo.isConnected());
     }
 
-    private void creaLista( ){
+    private CustomListViewHome adapter;
+
+    private void creaLista() {
         //CREO LA LISTA CON I DATI CONTENUTI NEL VETTORE DI MONUMENTI
         ListView listView = findViewById(R.id.listv);
 
-        if (Build.VERSION.SDK_INT >= 24)monumenti.sort(new ComparatorDistance());
         // creo e istruisco l'adattatore
-        final CustomListViewHome adapter = new CustomListViewHome(this, R.layout.listitem, monumenti);
+        adapter = new CustomListViewHome(this, R.layout.listitem, monumenti);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,22 +140,27 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
                 double latitude = monumenti.get(pos).getLatitude() + .0002;
                 double longitude;
                 longitude = monumenti.get(pos).getLongitude();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 19.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 19.0f));
                 monumenti.get(pos).getMarker().showInfoWindow();
                 slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
         });
 
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap=googleMap;
+        mMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        checkLocationPermission();
 
-        if(provider!=null) googleMap.setMyLocationEnabled(true);
-        ImageButton slideup=findViewById(R.id.button_up);
-        slideup.setOnClickListener(new View.OnClickListener(){
+        if (provider != null) {
+            googleMap.setMyLocationEnabled(true);
+            location = locationManager.getLastKnownLocation(provider);
 
+        }
+        ImageButton slideup = findViewById(R.id.button_up);
+        slideup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
@@ -163,23 +168,13 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
         });
         //ESPANDO IL PANNELLO SLIDING
         slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-        try {
-            //CARICO I MONUMENTI DALLA PAGINA PHP
-            monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute("carovigno.php").get(),getBaseContext());
-            if(provider!=null && location!=null) setDistances(location.getLatitude(),location.getLongitude());
-        } catch (JSONException | InterruptedException | ExecutionException e) {
-
-            e.printStackTrace();
-        }
-            if (monumenti!=null) {
-                addMarker( );
-                creaLista();
-                setCustomInfoWindows();
-            }
-
+        if (monumenti != null) {
+            addMarker();
+            creaLista();
+            setCustomInfoWindows();
         }
 
-
+    }
 
 
     public boolean checkLocationPermission() {
@@ -190,10 +185,6 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.title_location_permission)
                         .setMessage(R.string.text_location_permission)
@@ -236,10 +227,15 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-
                         //Request location updates:
-                        if (provider!=null)
+                        provider = locationManager.getBestProvider(new Criteria(), false);
+
+                        if (provider != null) {
                             locationManager.requestLocationUpdates(provider, 400, 1, this);
+                            setDistances(locationManager.getLastKnownLocation(provider).getLatitude(), locationManager.getLastKnownLocation(provider).getLongitude());
+
+                        }
+
                     }
 
                 } else {
@@ -251,33 +247,35 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
         }
 
     }
+
     private void setCustomInfoWindows() {
-        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this,monumenti);
+        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this, monumenti);
         mMap.setInfoWindowAdapter(customInfoWindow);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
             @Override
             public void onInfoWindowClick(Marker arg0) {
-                Intent intent = new Intent(HomeMonumenti.this ,  Information.class);
-                int i=0;
+                Intent intent = new Intent(HomeMonumenti.this, Information.class);
+                int i = 0;
                 //TO DO
                 while (!arg0.getTitle().equals(monumenti.get(i).getMarker().getTitle())) i++;
-                intent.putExtra("monumenti",monumenti.get(i));
+                intent.putExtra("monumenti", monumenti.get(i));
                 startActivity(intent);
             }
         });
 
     }
 
-    private void setDistances(double lat,double lon){
+    private void setDistances(double lat, double lon) {
         for (Monumento monumento : monumenti) {
-            monumento.setDistanceToMonument(lat,lon);
-            }
+            monumento.setDistanceToMonument(lat, lon);
+        }
+        if (Build.VERSION.SDK_INT >= 24) monumenti.sort(new ComparatorDistance());
+        if (adapter != null) adapter.notifyDataSetChanged();
     }
 
 
-
-    private void addMarker( ){
+    private void addMarker() {
         for (Monumento monumento : monumenti) {
             monumento.setMarker(mMap.addMarker(new MarkerOptions()
                     .title(monumento.getNome())
@@ -288,17 +286,23 @@ if(locationManager!=null)  locationManager.removeUpdates(this);
 
     @Override
     public void onLocationChanged(Location location) {
+        location = locationManager.getLastKnownLocation(provider);
+        setDistances(location.getLatitude(), location.getLongitude());
+
 
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        location = locationManager.getLastKnownLocation(provider);
+        setDistances(location.getLatitude(), location.getLongitude());
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
+        this.provider = locationManager.getBestProvider(new Criteria(), false);
+        location = locationManager.getLastKnownLocation(provider);
+        setDistances(location.getLatitude(), location.getLongitude());
     }
 
     @Override

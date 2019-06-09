@@ -118,11 +118,17 @@
                 android:textSize="24sp"
                 tools:text="Storia" />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:background="?android:attr/listDivider" />
+
             <TextView
                 android:id="@+id/descrizione_info_complete"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/annie_use_your_telescope"
+                android:fontFamily="@font/averia_libre"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textSize="18sp" />
 

@@ -1,4 +1,4 @@
-package citta;
+package c.www.carovignoviva.citta;
 
 import android.app.Activity;
 import android.content.Intent;

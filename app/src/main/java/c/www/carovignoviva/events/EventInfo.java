@@ -1,4 +1,4 @@
-package events;
+package c.www.carovignoviva.events;
 
 import android.app.Activity;
 import android.content.Intent;

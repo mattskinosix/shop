@@ -1,10 +1,8 @@
-package citta;
+package c.www.carovignoviva.events;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,20 +11,13 @@ import androidx.annotation.Nullable;
 
 import org.json.JSONException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import Server.GetFromServer;
+import c.www.carovignoviva.Server.GetFromServer;
 import c.www.carovignoviva.R;
 
-public class HomeCitta extends Activity {
+public class HomeEventi extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +25,9 @@ public class HomeCitta extends Activity {
 
             //CREO LA LISTA CON I DATI CONTENUTI NEL VETTORE DI MONUMENTI
             ListView listView = findViewById(R.id.Listeventi);
-        ArrayList<Citta> cityes=null;
+        ArrayList<Event> events=null;
         try {
-            cityes = new Citta().eventoFromJson(new GetFromServer().execute("citta.php").get());
+            events = new Event().eventoFromJson(new GetFromServer().execute("events.php").get());
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -46,13 +37,13 @@ public class HomeCitta extends Activity {
         }
 
         // creo e istruisco l'adattatore
-            final CustomListViewCitta adapter = new CustomListViewCitta(this, R.layout.list_item_citta,cityes);
+            final CustomListViewEvents adapter = new CustomListViewEvents(this, R.layout.list_item_evento,events);
             listView.setAdapter(adapter);
-        final ArrayList<Citta> finalEvents = cityes;
+        final ArrayList<Event> finalEvents = events;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adattatore, final View componente, int pos, long id) {
-                    Intent intent = new Intent(HomeCitta.this ,  CittaInfo.class);
+                    Intent intent = new Intent(HomeEventi.this ,  EventInfo.class);
                     intent.putExtra("Citta", finalEvents.get(pos));
                     startActivity(intent);
                 }
@@ -60,5 +51,6 @@ public class HomeCitta extends Activity {
         });
 
     }
+
 
 }

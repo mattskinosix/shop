@@ -16,7 +16,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity android:name="homepage.Home">
+        <activity android:name="c.www.carovignoviva.homepage.Home"
+            android:theme="@style/MatherialBlue">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
@@ -24,11 +25,11 @@
 
         </intent-filter>
         </activity>
-        <activity android:name="monuments.Information" />
-        <activity android:name="events.HomeEventi" />
-        <activity android:name="monuments.HomeMonumenti" />
-        <activity android:name="events.EventInfo" />
-        <activity android:name="citta.HomeCitta" />
-        <activity android:name="citta.CittaInfo" />
+        <activity android:name="c.www.carovignoviva.monuments.Information" />
+        <activity android:name="c.www.carovignoviva.events.HomeEventi" />
+        <activity android:name="c.www.carovignoviva.monuments.HomeMonumenti" />
+        <activity android:name="c.www.carovignoviva.events.EventInfo" />
+        <activity android:name="c.www.carovignoviva.citta.HomeCitta" />
+        <activity android:name="c.www.carovignoviva.citta.CittaInfo" />
     </application>
 </manifest>
