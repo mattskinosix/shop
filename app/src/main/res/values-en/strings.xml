@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CarovignoViva</string>
+    <string name="eventi">Events</string>
+    <string name="descrizione">Description</string>
+    <string name="citt_vicine">Near Cities</string>
+    <string name="leggi_la_storia">Read story</string>
+    <string name="monumenti">Monuments</string>
+    <string name="open_street_view_frame">Street_view</string>
+    <string name="ora_inizio_ora_fine">Open/Close</string>
+    <string name="orario_visite">visiting hours</string>
+    <string name="portami_qui">bring me here</string>
+    <string name="text_location_permission" translatable="false">You want to give me the position</string>
+    <string name="title_location_permission">Position</string>
+    <string name="tocca_la_citta_che_vuoi_visitare" translatable="false">Touch the city you want to visit</string>
+    <string name="tocca_per_leggere_la_storia" translatable="false">Tap to read the story</string>
+</resources>

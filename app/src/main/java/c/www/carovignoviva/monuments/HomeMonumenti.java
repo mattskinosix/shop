@@ -38,6 +38,7 @@ import org.json.JSONException;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import c.www.carovignoviva.Server.GetFromServer;
@@ -67,6 +68,9 @@ public class HomeMonumenti extends FragmentActivity implements OnMapReadyCallbac
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             provider = locationManager.getBestProvider(new Criteria(), false);
             try {
+                if(Locale.getDefault().getDisplayLanguage().equals("English"))
+                    monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute("carovigno_en.php").get(), getBaseContext());
+                else
                 //CARICO I MONUMENTI DALLA PAGINA PHP
                 monumenti = new Monumento().monumentoFromJson(new GetFromServer().execute("carovigno.php").get(), getBaseContext());
                 if (provider != null && location != null && adapter != null)

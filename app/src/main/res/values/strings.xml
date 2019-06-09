@@ -1,22 +1,22 @@
 <resources>
     <string name="app_name">CarovignoViva</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="text_location_permission">Vuoi darmi la posizione</string>
     <string name="title_location_permission">Posizione</string>
-    <string name="close_map_s_fragment">Close map\'s fragment</string>
-    <string name="principal_image_in_informazioni_complete">principal image in informazioni complete</string>
-    <string name="button_for_navigator">button for navigator</string>
+    <string name="close_map_s_fragment" translatable="false">Close map\'s fragment</string>
+    <string name="principal_image_in_informazioni_complete" translatable="false">principal image in informazioni complete</string>
+    <string name="button_for_navigator" translatable="false">button for navigator</string>
     <string name="open_street_view_frame">Street view</string>
-    <string name="button">Button</string>
-    <string name="carovigno">Carovigno</string>
-    <string name="s_sabina">S.Sabina</string>
-    <string name="serranova">Serranova</string>
-    <string name="specchiolla">Specchiolla</string>
-    <string name="carovignoviva">CarovignoViva</string>
+    <string name="button" translatable="false">Button</string>
+    <string name="carovigno" translatable="false">Carovigno</string>
+    <string name="s_sabina" translatable="false">S.Sabina</string>
+    <string name="serranova" translatable="false">Serranova</string>
+    <string name="specchiolla" translatable="false">Specchiolla</string>
+    <string name="carovignoviva" translatable="false">CarovignoViva</string>
     <string name="tocca_la_citta_che_vuoi_visitare">Tocca la citta che vuoi visitare</string>
     <string name="leggi_la_storia">Leggi la storia</string>
-    <string name="swide_up">SWide Up</string>
-    <string name="image_of_monuments">image of monuments</string>
+    <string name="swide_up" translatable="false">SWide Up</string>
+    <string name="image_of_monuments" translatable="false">image of monuments</string>
     <string name="tocca_per_leggere_la_storia">Tocca per leggere la Storia</string>
     <string name="monumenti">Monumenti</string>
     <string name="eventi">Eventi</string>
@@ -24,12 +24,12 @@
     <string name="ora_inizio_ora_fine">Ora inizio Ora fine</string>
     <string name="orario_visite">Orario Visite:</string>
     <string name="portami_qui">Portami Qui</string>
-    <string name="storia">Storia</string>
-    <string name="immagine_evento">Immagine evento</string>
+    <string name="storia" translatable="false">Storia</string>
+    <string name="immagine_evento" translatable="false">Immagine evento</string>
     <string name="descrizione">Descrizione</string>
-    <string name="castello_carovigno">Castello carovigno</string>
-    <string name="bottone_eventi">Bottone eventi</string>
+    <string name="castello_carovigno" translatable="false">Castello carovigno</string>
+    <string name="bottone_eventi" translatable="false">Bottone eventi</string>
+    <string name="stemma_carovigno" translatable="false">Stemma Carovigno</string>
+    <string name="bottone" translatable="false">bottone</string>
     <string name="citt_vicine">Città vicine</string>
-    <string name="stemma_carovigno">Stemma Carovigno</string>
-    <string name="bottone">bottone</string>
 </resources>
