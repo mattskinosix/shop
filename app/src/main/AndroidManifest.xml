@@ -25,6 +25,7 @@
 
         </intent-filter>
         </activity>
+        <activity android:name="c.www.carovignoviva.login.login.LoginActivity" />
         <activity android:name="c.www.carovignoviva.monuments.Information" />
         <activity android:name="c.www.carovignoviva.events.HomeEventi" />
         <activity android:name="c.www.carovignoviva.monuments.HomeMonumenti" />

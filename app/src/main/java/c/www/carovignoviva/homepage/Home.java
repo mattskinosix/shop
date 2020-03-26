@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import c.www.carovignoviva.R;
-import c.www.carovignoviva.citta.HomeCitta;
-import c.www.carovignoviva.events.HomeEventi;
+import c.www.carovignoviva.login.login.LoginActivity;
 import c.www.carovignoviva.monuments.HomeMonumenti;
 
 public class Home extends Activity {
@@ -16,21 +15,19 @@ public class Home extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-        View monumento = findViewById(R.id.button_monumenti);
-        monumento.setOnClickListener(monumentsButtonListener);
-        View events =findViewById(R.id.button_events);
-        events.setOnClickListener(eventsButtonListener);
-        View citta =findViewById(R.id.button_citta);
-        citta.setOnClickListener(cittaButtonListener);
+        View login = findViewById(R.id.login);
+        login.setOnClickListener(loginButtonListener);
+        View registrazione =findViewById(R.id.registrazione);
+        registrazione.setOnClickListener(registrazioneButtonListener);
     }
 
 
 
-    private View.OnClickListener monumentsButtonListener = new View.OnClickListener() {
+    private View.OnClickListener registrazioneButtonListener = new View.OnClickListener() {
         public void onClick(View arg0) {
-            if (arg0.getId() == R.id.button_monumenti) {
+            if (arg0.getId() == R.id.registrazione) {
                 //define a new Intent for the second Activity
-                Intent intent = new Intent(Home.this , HomeMonumenti.class);
+                Intent intent = new Intent(c.www.carovignoviva.homepage.Home.this , HomeMonumenti.class);
                 //start the second Activity
                 startActivity(intent);
 
@@ -39,26 +36,11 @@ public class Home extends Activity {
         }
     };
 
-    private View.OnClickListener eventsButtonListener = new View.OnClickListener() {
+    private View.OnClickListener loginButtonListener = new View.OnClickListener() {
         public void onClick(View arg0) {
-            if (arg0.getId() == R.id.button_events) {
+            if (arg0.getId() == R.id.login) {
                 //define a new Intent for the second Activity
-                Intent intent = new Intent(Home.this, HomeEventi.class);
-                //start the second Activity
-                startActivity(intent);
-
-            }
-
-
-        }
-
-    };
-
-    private View.OnClickListener cittaButtonListener = new View.OnClickListener() {
-        public void onClick(View arg0) {
-            if (arg0.getId() == R.id.button_citta) {
-                //define a new Intent for the second Activity
-                Intent intent = new Intent(Home.this, HomeCitta.class);
+                Intent intent = new Intent(c.www.carovignoviva.homepage.Home.this, LoginActivity.class);
                 //start the second Activity
                 startActivity(intent);
 
@@ -68,6 +50,7 @@ public class Home extends Activity {
         }
 
     };
+
 
 
 }
