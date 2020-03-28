@@ -12,7 +12,7 @@ android {
             keyPassword 'meocameo'
             storeFile file('googlemapsapi.txt')
             storePassword 'storepass'
-            packagingOptions{
+            packagingOptions {
                 exclude 'META-INF/INDEX.LIST'
                 exclude 'META-INF/DEPENDENCIES'
             }
@@ -34,7 +34,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { assets.srcDirs = ['src/c.www.carovignoviva.main/assets', 'src/c.www.carovignoviva.main/assets/databses'] } }
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/c.www.carovignoviva.main/assets', 'src/c.www.carovignoviva.main/assets/databses']
+        }
+    }
 }
 
 dependencies {
@@ -52,5 +56,8 @@ dependencies {
     implementation 'com.google.cloud:google-cloud-translate:1.70.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.google.android.material:material:1.1.0'
 
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

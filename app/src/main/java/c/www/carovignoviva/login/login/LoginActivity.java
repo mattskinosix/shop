@@ -1,6 +1,7 @@
 package c.www.carovignoviva.login.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import c.www.carovignoviva.R;
+import c.www.carovignoviva.menu.menu;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -108,8 +110,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                Intent intent = new Intent(c.www.carovignoviva.login.login.LoginActivity.this, menu.class);
+                //start the second Activity
+                startActivity(intent);
+
             }
         });
     }

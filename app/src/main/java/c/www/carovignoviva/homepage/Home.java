@@ -7,7 +7,7 @@ import android.view.View;
 
 import c.www.carovignoviva.R;
 import c.www.carovignoviva.login.login.LoginActivity;
-import c.www.carovignoviva.monuments.HomeMonumenti;
+import c.www.carovignoviva.registrazione.registrazione;
 
 public class Home extends Activity {
 
@@ -27,7 +27,7 @@ public class Home extends Activity {
         public void onClick(View arg0) {
             if (arg0.getId() == R.id.registrazione) {
                 //define a new Intent for the second Activity
-                Intent intent = new Intent(c.www.carovignoviva.homepage.Home.this , HomeMonumenti.class);
+                Intent intent = new Intent(c.www.carovignoviva.homepage.Home.this , registrazione.class);
                 //start the second Activity
                 startActivity(intent);
 

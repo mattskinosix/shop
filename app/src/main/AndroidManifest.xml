@@ -1,36 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="c.www.carovignoviva">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/stemma"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".categorie.MainActivity"></activity>
+        <activity android:name=".registrazione.registrazione" />
+        <activity android:name=".menu.menu" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity android:name="c.www.carovignoviva.homepage.Home"
-            android:theme="@style/MatherialBlue">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-            <category android:name="android.intent.category.DEFAULT"/>
 
-        </intent-filter>
+        <activity
+            android:name=".homepage.Home"
+            android:theme="@style/MatherialBlue">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
-        <activity android:name="c.www.carovignoviva.login.login.LoginActivity" />
-        <activity android:name="c.www.carovignoviva.monuments.Information" />
-        <activity android:name="c.www.carovignoviva.events.HomeEventi" />
-        <activity android:name="c.www.carovignoviva.monuments.HomeMonumenti" />
-        <activity android:name="c.www.carovignoviva.events.EventInfo" />
-        <activity android:name="c.www.carovignoviva.citta.HomeCitta" />
-        <activity android:name="c.www.carovignoviva.citta.CittaInfo" />
+        <activity android:name=".login.login.LoginActivity" />
     </application>
+
 </manifest>
