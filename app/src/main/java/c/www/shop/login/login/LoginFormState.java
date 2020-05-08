@@ -1,4 +1,4 @@
-package c.www.carovignoviva.login.login;
+package c.www.shop.login.login;
 
 import androidx.annotation.Nullable;
 

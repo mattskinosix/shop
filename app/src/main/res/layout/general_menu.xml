@@ -12,7 +12,7 @@
         app:srcCompat="@drawable/carovigno_castello_di_carovigno" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/scan_qrcode"
         android:layout_width="match_parent"
         android:layout_height="139dp"
         android:backgroundTint="#FFFFFF"
@@ -20,13 +20,36 @@
         android:textColor="#000000"
         android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/product_in_stock"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="133dp"
-        android:backgroundTint="#388E3C"
-        android:text="Products in Stock"
-        android:textSize="24sp" />
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/product_in_stock"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#43D34A"
+            android:baselineAligned="false"
+            android:text="Products in Stock"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/account_setting"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#FFEB3B"
+            android:baselineAligned="false"
+            android:text="Account Settings"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,20 +58,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
+            android:id="@+id/special_product"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:backgroundTint="#D32F2F"
             android:text="Special Products"
+            android:textColor="#000000"
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
+            android:id="@+id/promotions"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:backgroundTint="#303F9F"
             android:text="Promotions"
+            android:textColor="#000000"
             android:textSize="18sp" />
+
     </LinearLayout>
 
 </LinearLayout>

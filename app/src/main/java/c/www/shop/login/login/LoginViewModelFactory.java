@@ -1,11 +1,11 @@
-package c.www.carovignoviva.login.login;
+package c.www.shop.login.login;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import c.www.carovignoviva.login.data.LoginDataSource;
-import c.www.carovignoviva.login.data.LoginRepository;
+import c.www.shop.login.data.LoginDataSource;
+import c.www.shop.login.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

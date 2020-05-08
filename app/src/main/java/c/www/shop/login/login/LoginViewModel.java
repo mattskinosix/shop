@@ -1,14 +1,15 @@
-package c.www.carovignoviva.login.login;
+package c.www.shop.login.login;
 
 import android.util.Patterns;
-import c.www.carovignoviva.R;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import c.www.carovignoviva.login.data.LoginRepository;
-import c.www.carovignoviva.login.data.Result;
-import c.www.carovignoviva.login.data.model.LoggedInUser;
+import c.www.shop.R;
+import c.www.shop.login.data.LoginRepository;
+import c.www.shop.login.data.Result;
+import c.www.shop.login.data.model.LoggedInUser;
 
 
 public class LoginViewModel extends ViewModel {

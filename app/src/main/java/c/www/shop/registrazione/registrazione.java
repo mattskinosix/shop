@@ -1,15 +1,14 @@
-package c.www.carovignoviva.registrazione;
-
-import androidx.appcompat.app.AppCompatActivity;
+package c.www.shop.registrazione;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import c.www.carovignoviva.R;
-import c.www.carovignoviva.homepage.Home;
-import c.www.carovignoviva.menu.menu;
+import androidx.appcompat.app.AppCompatActivity;
+
+import c.www.shop.R;
+import c.www.shop.homepage.Home;
 
 public class registrazione extends AppCompatActivity {
 

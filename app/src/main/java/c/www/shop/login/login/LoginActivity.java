@@ -1,4 +1,4 @@
-package c.www.carovignoviva.login.login;
+package c.www.shop.login.login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,8 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import c.www.carovignoviva.R;
-import c.www.carovignoviva.menu.menu;
+import c.www.shop.R;
+import c.www.shop.menu.menu;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,8 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
@@ -110,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                Intent intent = new Intent(c.www.carovignoviva.login.login.LoginActivity.this, menu.class);
+                Intent intent = new Intent(c.www.shop.login.login.LoginActivity.this, menu.class);
                 //start the second Activity
                 startActivity(intent);
 

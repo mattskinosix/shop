@@ -1,8 +1,8 @@
-package c.www.carovignoviva.login.data;
+package c.www.shop.login.data;
 
 import java.io.IOException;
 
-import c.www.carovignoviva.login.data.model.LoggedInUser;
+import c.www.shop.login.data.model.LoggedInUser;
 
 /**
  * Class that handles authentication w/ c.www.carovignoviva.login credentials and retrieves user information.

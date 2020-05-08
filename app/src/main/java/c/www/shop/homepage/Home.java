@@ -1,13 +1,13 @@
-package c.www.carovignoviva.homepage;
+package c.www.shop.homepage;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import c.www.carovignoviva.R;
-import c.www.carovignoviva.login.login.LoginActivity;
-import c.www.carovignoviva.registrazione.registrazione;
+import c.www.shop.R;
+import c.www.shop.login.login.LoginActivity;
+import c.www.shop.registrazione.registrazione;
 
 public class Home extends Activity {
 
@@ -27,7 +27,7 @@ public class Home extends Activity {
         public void onClick(View arg0) {
             if (arg0.getId() == R.id.registrazione) {
                 //define a new Intent for the second Activity
-                Intent intent = new Intent(c.www.carovignoviva.homepage.Home.this , registrazione.class);
+                Intent intent = new Intent(c.www.shop.homepage.Home.this, registrazione.class);
                 //start the second Activity
                 startActivity(intent);
 
@@ -40,7 +40,7 @@ public class Home extends Activity {
         public void onClick(View arg0) {
             if (arg0.getId() == R.id.login) {
                 //define a new Intent for the second Activity
-                Intent intent = new Intent(c.www.carovignoviva.homepage.Home.this, LoginActivity.class);
+                Intent intent = new Intent(c.www.shop.homepage.Home.this, LoginActivity.class);
                 //start the second Activity
                 startActivity(intent);
 

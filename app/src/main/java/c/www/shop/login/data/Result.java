@@ -1,4 +1,4 @@
-package c.www.carovignoviva.login.data;
+package c.www.shop.login.data;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.

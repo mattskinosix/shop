@@ -1,4 +1,4 @@
-package c.www.carovignoviva.login.data.model;
+package c.www.shop.login.data.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="c.www.carovignoviva">
+    package="c.www.shop">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,19 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".categorie.MainActivity"></activity>
-        <activity android:name=".registrazione.registrazione" />
-        <activity android:name=".menu.menu" />
-
+        <activity android:name="c.www.shop.categorie.MainActivity"></activity>
+        <activity android:name="c.www.shop.registrazione.registrazione" />
+        <activity android:name="c.www.shop.menu.menu" />
+        <activity android:name="c.www.shop.qrcode.ScannedBarcodeActivity" />
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".homepage.Home"
+            android:name="c.www.shop.homepage.Home"
             android:theme="@style/MatherialBlue">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +33,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.login.LoginActivity" />
+        <activity android:name="c.www.shop.login.login.LoginActivity" />
     </application>
 
 </manifest>

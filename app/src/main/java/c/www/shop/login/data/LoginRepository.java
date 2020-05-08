@@ -1,6 +1,6 @@
-package c.www.carovignoviva.login.data;
+package c.www.shop.login.data;
 
-import c.www.carovignoviva.login.data.model.LoggedInUser;
+import c.www.shop.login.data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

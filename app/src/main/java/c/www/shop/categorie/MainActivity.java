@@ -1,9 +1,10 @@
-package c.www.carovignoviva.categorie;
+package c.www.shop.categorie;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import c.www.carovignoviva.R;
+import c.www.shop.R;
 public class MainActivity extends AppCompatActivity {
 
     @Override

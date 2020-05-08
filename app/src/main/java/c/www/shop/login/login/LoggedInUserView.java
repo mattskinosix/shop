@@ -1,4 +1,4 @@
-package c.www.carovignoviva.login.login;
+package c.www.shop.login.login;
 
 /**
  * Class exposing authenticated user details to the UI.
