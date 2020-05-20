@@ -49,7 +49,22 @@ public class ScannedBarcodeActivity extends AppCompatActivity {
     private void initViews() {
         txtBarcodeValue = findViewById(R.id.txtBarcodeValue);
         surfaceView = findViewById(R.id.surfaceView);
+        btnAction = findViewById(R.id.btnAction);
 
+
+        btnAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (intentData.length() > 0) {
+
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
+
+                }
+
+
+            }
+        });
     }
 
     private void initialiseDetectorsAndSources() {
